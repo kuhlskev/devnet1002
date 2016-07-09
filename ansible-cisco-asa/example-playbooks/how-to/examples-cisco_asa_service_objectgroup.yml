@@ -1,0 +1,77 @@
+#This playbook can be used to create Network Object Groups from individual entries or lists.
+#Object groups can be removed or individual entries removed as well.  All tasks are idempotent.
+---
+-  name: ASA acl creation
+   hosts: asa
+   connection: local
+   gather_facts: True
+
+   tasks:
+     - include_vars: "{{playbook_dir}}/../../passwords.yml"
+       #when: ansible_user_id != "jenkins" and decrypt_vault == True
+       no_log: True
+
+     - name: Create Svc Object Groups
+       cisco_asa_service_objectgroup_members:
+           host: "{{ inventory_hostname }}"
+           username: "{{username}}"
+           password: "{{password}}"
+           name: SRV_OG
+           state: present
+           protocol: tcp
+           #description: "{{item.description}}"
+           value: 'smtp'
+           validate_certs: False
+
+     - name: Create Svc Object Groups
+       cisco_asa_service_objectgroup_members:
+           host: "{{ inventory_hostname }}"
+           username: "{{username}}"
+           password: "{{password}}"
+           name: SRV_OG
+           state: present
+           protocol: tcp
+           #description: "{{item.description}}"
+           members: 
+              - ssh
+              - 8443
+           validate_certs: False
+
+     - name: Remove Entry from Svc Object Groups
+       cisco_asa_service_objectgroup_members:
+           host: "{{ inventory_hostname }}"
+           username: "{{username}}"
+           password: "{{password}}"
+           name: SRV_OG
+           state: present
+           entry_state: absent
+           protocol: tcp
+           #description: "{{item.description}}"
+           value: 'smtp'
+           validate_certs: False
+   
+     - name: Remove List of Entries from Svc Object Group
+       cisco_asa_service_objectgroup_members:
+           host: "{{ inventory_hostname }}"
+           username: "{{username}}"
+           password: "{{password}}"
+           name: SRV_OG
+           state: present
+           entry_state: absent
+           protocol: tcp
+           #description: "{{item.description}}"
+           members: ['ssh']
+           validate_certs: False
+   
+     - name: Remove Svc Object Group
+       cisco_asa_service_objectgroup_members:
+           host: "{{ inventory_hostname }}"
+           username: "{{username}}"
+           password: "{{password}}"
+           name: SRV_OG
+           state: absent
+           protocol: tcp
+           #entry_state: present #entry state is ignored and may be present, absent or not included when 'state' is absent.
+           #description:
+           members: [] #Members has no impact on results, but requires an iterable type, here an empty list is used
+           validate_certs: False

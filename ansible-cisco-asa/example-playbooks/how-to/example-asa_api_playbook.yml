@@ -1,0 +1,70 @@
+---
+- name: ASA acl creation
+  hosts: asa
+  connection: local
+  gather_facts: True
+
+  tasks:
+  - include_vars: "{{playbook_dir}}/../../passwords.yml"
+    #when: ansible_user_id != "jenkins" and decrypt_vault == True
+    no_log: False
+  - name: Create Svc Object Groups
+    cisco_asa_service_objectgroup_members:
+        host: "{{ inventory_hostname }}"
+        username: "{{username}}"
+        password: "{{password}}"
+        name: SRV_OG
+        state: present
+        protocol: tcp
+        #description: "{{item.description}}"
+        members: ['ssh']
+        validate_certs: False
+
+  - debug: var=inventory_hostname
+
+  - name: Create Net Object Groups
+    cisco_asa_network_objectgroup_members:
+        host: "{{ inventory_hostname }}"
+        username: "{{username}}"
+        password: "{{password}}"
+        name: kev
+        state: present
+        #description:
+        members: 
+           - 72.247.124.172/31
+           - 72.246.193.231/32
+        validate_certs: False
+
+  - name: Create ACL
+    cisco_asa_create_acl:
+        host: "{{ inventory_hostname }}"
+        username: "{{username}}"
+        password: "{{password}}"
+        state: present
+        acl_name: TEST
+        permit: true
+        protocol: tcp
+        entry:
+            destination_address: '2.2.2.2'
+            destination_service: 'SRV_OG'
+            source_address: 'kev'
+        position: 1 #position 1 should be fine for all entries unless a deny
+        validate_certs: False
+
+  - name: Routes
+    cisco_asa_route:
+       host: "{{ inventory_hostname }}"
+       username: "{{username}}"
+       password: "{{password}}"
+       next_hop: 172.23.204.1
+       interface: outside  #make sure you have an interface named outside
+       network: 3.3.7.0/24  
+       state: present
+       validate_certs: False
+
+  - name: Save Config
+    cisco_asa_write_mem:
+        host: "{{ inventory_hostname }}"
+        username: "{{username}}"
+        password: "{{password}}"
+        validate_certs: False

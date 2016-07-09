@@ -1,0 +1,33 @@
+#This playbook can be used to create individual routes and remove individual routes.
+---
+-  name: ASA acl creation
+   hosts: asa
+   connection: local
+   gather_facts: True
+
+   tasks:
+     - include_vars: "{{playbook_dir}}/../../passwords.yml"
+       #when: ansible_user_id != "jenkins" and decrypt_vault == True
+       no_log: True
+
+     - name: Routes
+       cisco_asa_route:
+          host: "{{ inventory_hostname }}"
+          username: "{{username}}"
+          password: "{{password}}"
+          next_hop: 172.23.204.1
+          interface: outside
+          network: 3.3.7.0/24  
+          state: present
+          validate_certs: False
+   
+     - name: Routes
+       cisco_asa_route:
+          host: "{{ inventory_hostname }}"
+          username: "{{username}}"
+          password: "{{password}}"
+          next_hop: 172.23.204.1
+          interface: outside
+          network: 3.3.7.0/24  
+          state: absent
+          validate_certs: False   
