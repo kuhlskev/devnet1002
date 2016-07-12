@@ -3,15 +3,15 @@
 case "$1" in
 
 1) echo "VPN v540user2"
-   printf "v540user2\nP5b227a\ny" | /opt/cisco/anyconnect/bin/vpn -s connect dcloud-lon-anyconnect.cisco.com
+   printf "v540user2\n5b227a\ny" | /opt/cisco/anyconnect/bin/vpn -s connect dcloud-lon-anyconnect.cisco.com
    ;;
 
 2) echo "VPN v540user3"
-   printf "v540user3\nP5b227a\ny" | /opt/cisco/anyconnect/bin/vpn -s connect dcloud-lon-anyconnect.cisco.com
+   printf "v540user3\n5b227a\ny" | /opt/cisco/anyconnect/bin/vpn -s connect dcloud-lon-anyconnect.cisco.com
    ;;
 
 3) echo "VPN v540user4"
-   printf "v540user4\nP5b227a\ny" | /opt/cisco/anyconnect/bin/vpn -s connect dcloud-lon-anyconnect.cisco.com
+   printf "v540user4\n5b227a\ny" | /opt/cisco/anyconnect/bin/vpn -s connect dcloud-lon-anyconnect.cisco.com
    ;;
 
 4) echo "VPN v655user2"
