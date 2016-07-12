@@ -78,8 +78,6 @@ ip ssh source-interface GigabitEthernet0/0
 ip ssh version 2
 ip ssh authentication-retries 2
 !
-ip scp server enable
-!
 ip access-list standard Mgmt
  permit {{mgmt_network_cidr | ipaddr('network')}} 0.0.0.255
 ip access-list standard rfc1918
@@ -127,18 +125,6 @@ line vty 0 15
 !
 exception crashinfo maximum files 5
 !
-ip access-list standard ntp-servers
- permit {{ntp2}}
- permit {{ntp1}}
-!
-ntp access-group peer ntp-servers
-ntp logging
-ntp source GigabitEthernet0/0
-ntp server vrf Mgmt-intf  {{ntp2}}
-ntp server vrf Mgmt-intf {{ntp1}} prefer
-!
 access-list 11 permit {{mgmt_network_cidr | ipaddr('network')}} 0.0.0.255
-netconf max-sessions 16
-netconf lock-time 60
-netconf ssh acl 11
+
 !
