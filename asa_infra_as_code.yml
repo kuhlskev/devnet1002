@@ -17,8 +17,8 @@
   - name: Create Svc Object Groups
     cisco_asa_service_objectgroup_members:
        host: "{{ inventory_hostname }}"
-       username: cisco
-       password: cisco
+       username: "{{username}}"
+       password: "{{password}}"
        name: "{{item['name']}}"
        state: "{{item['state'] | default('present')}}"
        entry_state: "{{item['entry_state'] | default('present')}}"
