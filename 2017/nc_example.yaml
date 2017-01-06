@@ -20,7 +20,7 @@
                 <ntp>
                     <server>
                       <server-list>
-                        <ip-address>1.1.1.1</ip-address>
+                        <ip-address>2.2.2.2</ip-address>
                       </server-list>
                     </server>
                 </ntp>
