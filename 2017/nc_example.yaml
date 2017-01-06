@@ -9,9 +9,10 @@
   tasks:
 
     - name: set ntp server in the device
-      netconf_config:
+      netconf_config_kev:
         host: "{{inventory_hostname}}"
         username: "{{username}}"
+        hostkey_verify: False
         password: "{{password}}"
         xml: |
             <config xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0">
