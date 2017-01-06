@@ -1,0 +1,14 @@
+---
+- name: Push initial config
+  init_config_push:
+    con_server_user: "{{ con_server_user }}"
+    con_server_pass: "{{ con_server_pass }}"
+    device_username: "{{ username }}"
+    device_password: "{{ password }}"
+#    virl_port: "{{ virl_port }}"
+    log: True
+    log_file: "{{ log_dir }}"
+    console_host: "{{ console_host }}"
+  register: init_push
+
+- debug: var=init_push

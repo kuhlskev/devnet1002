@@ -1,0 +1,17 @@
+---
+- name: Push initial configurations to console port of devices at site
+  connection: local
+  hosts: console
+  gather_facts: True
+
+  vars:
+    con_server_user: cisco
+    con_server_pass: cisco
+    username: cisco
+    password: cisco
+    console_host: 192.235.88.142
+    port: 
+    log_dir: "{{ playbook_dir }}/logs/{{ inventory_hostname }}"
+
+  roles:
+    - console_config_push

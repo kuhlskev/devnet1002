@@ -1,0 +1,23 @@
+[all:vars]
+ansible_connection=local
+ansible_python_interpreter = /Users/kekuhls/anaconda/bin/python2.7
+
+[spine]
+nx-osv1 ansible_host=198.18.1.100
+#nx-osv2 ansible_host=198.18.1.101
+
+[leaf]
+nx-osv3 ansible_host=198.18.1.102
+#nx-osv4 ansible_host=198.18.1.103
+
+[switches:children]
+spine
+leaf
+
+[xr]
+198.18.1.106
+[fw]
+198.18.1.105
+
+[allasav]
+198.18.1.105

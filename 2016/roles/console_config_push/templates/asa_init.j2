@@ -1,0 +1,18 @@
+
+hostname {{ hostname }}
+int g0/0
+ip add {{ mgmt_ip }} 255.255.255.0
+nameif oob
+no shut
+int g0/1
+ip add 100.100.100.1 255.255.255.0
+nameif outside
+no shut
+http server en
+ssh scopy enable
+ssh 0.0.0.0 0.0.0.0 oob
+http 0.0.0.0 0.0.0.0 oob
+route oob 0.0.0.0 0.0.0.0 198.18.1.1
+username cisco password cisco priv 15
+aaa authentication ssh console LOCAL
+

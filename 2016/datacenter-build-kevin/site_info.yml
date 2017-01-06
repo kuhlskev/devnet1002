@@ -1,0 +1,21 @@
+---
+#Credentials
+username: cisco
+password: cisco
+admin_password: mypass
+enable_password: enable_password
+radius_key: radkey
+snmp_comm_string: snmpkey
+
+#IP Info
+v100_cidr: 192.168.100.0/24
+v101_cidr: 100.100.100.0/24
+v200_cidr: 192.168.200.0/24
+v201_cidr: 200.200.200.0/24
+v300_cidr: 30.30.30.0/24
+ntp_1: 1.1.1.1
+ntp_2: 2.2.2.2
+mgmt_network_cidr: 198.18.1.0/24
+
+site_name: devnet1002
+config_output_directory: "{{ playbook_dir }}/config_output/{{ site_name }}"

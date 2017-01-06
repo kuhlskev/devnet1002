@@ -1,0 +1,9 @@
+---
+
+layer3ip:
+  - {interface: Vlan100,ip: "{{ v100_cidr | ipaddr('3') | ipaddr('address') }}", mask: "{{ v100_cidr | ipaddr('prefix') }}" }
+  - {interface: Vlan101,ip: "{{ v101_cidr | ipaddr('3') | ipaddr('address') }}", mask: "{{ v101_cidr | ipaddr('prefix') }}"}
+  - {interface: Vlan200,ip: "{{ v200_cidr | ipaddr('3') | ipaddr('address') }}", mask: "{{ v200_cidr | ipaddr('prefix') }}" }
+  - {interface: Vlan201,ip: "{{ v201_cidr | ipaddr('3') | ipaddr('address') }}", mask: "{{ v201_cidr | ipaddr('prefix') }}" }
+
+hsrp_priority: 100

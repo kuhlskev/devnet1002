@@ -1,0 +1,9 @@
+
+hostname {{ hostname }}
+interface eth2/1
+  vrf member management
+ ip address {{ mgmt_ip }}/24
+vrf context management
+ip route 0.0.0.0/0 198.18.1.1
+username cisco password cisco role network-admin
+feature nxapi

@@ -1,0 +1,21 @@
+---
+vlans: [30,100,101,200,201,300]
+
+trunked_links:
+  - interface: Ethernet2/1
+    vlans: "100,101,200,201"
+    native_vlan: 30
+  - interface: Ethernet2/2
+    vlans: "100,101,200,201"
+    native_vlan: 30
+  - interface: Ethernet2/4
+    vlans: "101,201"
+    native_vlan: 30  
+
+access_links:
+  - interface: Ethernet2/5
+    vlan: 100
+  - interface: Ethernet2/6
+    vlan: 200
+  - interface: Ethernet2/3
+    vlan: 300    

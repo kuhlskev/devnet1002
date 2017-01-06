@@ -1,0 +1,17 @@
+---
+- name: Create config output directory
+  file:
+    path: "{{ config_output_directory }}"
+    state: directory
+
+- name: Generate ASR Configuration Files
+  template:
+    src: router_full.j2
+    dest: "{{ config_output_directory }}/{{hostname}}.txt"
+
+- iosxr_template:
+    host: "{{inventory_hostname}}"
+    username: "{{username}}"
+    password: "{{password}}"
+    src: "router_full.j2"
+  ignore_errors: yes

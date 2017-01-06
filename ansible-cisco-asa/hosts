@@ -1,6 +1,0 @@
-[all:vars]
-ansible_connection=local
-ansible_python_interpreter = /usr/local/bin/python2.7
-
-[asa]
-172.16.1.84

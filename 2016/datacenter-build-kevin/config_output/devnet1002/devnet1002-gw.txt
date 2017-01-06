@@ -1,0 +1,15 @@
+
+hostname devnet1002-WAN
+!
+interface GigabitEthernet0/0/0/0
+ ipv4 address 30.30.30.1 255.255.255.0
+ no shutdown
+ !
+!
+int loop50
+  ipv4 address 50.50.50.50/32
+  no shutdown
+
+router static
+  address-family ipv4 unicast 
+    0.0.0.0 0.0.0.0 30.30.30.4

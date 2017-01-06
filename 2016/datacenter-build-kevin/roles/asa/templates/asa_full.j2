@@ -1,0 +1,38 @@
+interface GigabitEthernet0/0
+no shut
+interface GigabitEthernet0/0.1
+ vlan {{red_vlan}}
+ nameif red
+ security-level 0
+ ip address {{red_asa_ip}} {{red_netmask}}
+!
+interface GigabitEthernet0/0.2
+ vlan {{blue_vlan}}
+ nameif blue
+ security-level 0
+ ip address {{blue_asa_ip}} {{blue_netmask}} 
+!
+interface GigabitEthernet0/0.3
+ vlan {{outside_vlan}}
+ nameif outside
+ security-level 0
+ ip address {{outside_asa_ip}} {{outside_netmask}} 
+!
+route red {{red_host_network}} {{red_netmask}} {{red_nh}} 1
+route blue {{blue_host_network}} {{blue_netmask}} {{blue_nh}} 1
+route outside 0.0.0.0 0.0.0.0 {{outside_nh}} 1
+!
+same-security-traffic permit inter-interface
+object-group network red
+ network-object {{red_host_network}} {{red_netmask}}
+ network-object {{red_network}} {{red_netmask}}
+object-group network blue
+ network-object {{blue_host_network}} {{blue_netmask}}
+ network-object {{blue_network}} {{blue_netmask}}
+object-group network INSIDE
+ group-object blue
+ group-object red
+!
+access-list RED-IN extended permit ip object-group red object-group blue 
+access-list BLUE-IN extended permit ip object-group blue object-group red 
+access-list OUTSIDE-IN extended permit ip any object-group INSIDE
