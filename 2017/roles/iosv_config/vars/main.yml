@@ -30,6 +30,7 @@ config_output_directory: "{{ playbook_dir }}/config_output/{{ site_name }}"
 inventory_directory: "{{ playbook_dir }}/inventory/"
 ntp1: 1.1.1.1
 ntp2: 2.2.2.2
+ntp3: 3.3.3.3
 logging_server: 10.10.10.10
 radius_server: 3.3.3.3
 snmp_server: 4.4.4.4
@@ -57,3 +58,16 @@ podiosv2:
     int_ip: "{{ int_asr2_ip }}",
     hsrp_priority: 100,
   }
+  
+xml_template: |
+            <config xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0">
+              <native xmlns="http://cisco.com/ns/yang/ned/ios" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+                <ntp>
+                    <server>
+                      <server-list>
+                        <ip-address>{{ntp3}}</ip-address>
+                      </server-list>
+                    </server>
+                </ntp>
+              </native>
+            </config>

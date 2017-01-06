@@ -31,29 +31,12 @@
     - deploy
   when: inventory_hostname[-1] == "2"
 
-- name: Generate ASR Configuration Files
-  template:
-    src: router_xml.j2
-    dest: "{{ config_output_directory }}/{{item.hostname}}.txt"
-  with_items: '{{[podiosv1[0],podiosv2[0]]}}'
-  run_once: true
-
-- ios_template:
+- name: set ntp server in the device
+  netconf_config_kev:
     host: "{{inventory_hostname}}"
     username: "{{username}}"
+    hostkey_verify: False
     password: "{{password}}"
-    src: "router_full.j2"
-  with_items: '{{podiosv1}}'
+    xml: "{{xml_template}}"
   tags:
     - xml_deploy
-  when: inventory_hostname[-1] == "1"
-
-- ios_template:
-    host: "{{inventory_hostname}}"
-    username: "{{username}}"
-    password: "{{password}}"
-    src: "router_full.j2"
-  with_items: '{{podiosv2}}'
-  tags:
-    - xml_deploy
-  when: inventory_hostname[-1] == "2"

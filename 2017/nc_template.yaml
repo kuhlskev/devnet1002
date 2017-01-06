@@ -1,0 +1,18 @@
+#simple IOS config in ansible
+---
+- name: Sample IOS config
+  hosts: podiosv
+  connection: local
+  gather_facts: True
+  vars_files:
+    - passwords.yml
+    - vars.yaml
+  tasks:
+
+    - name: set ntp server in the device
+      netconf_config_kev:
+        host: "{{inventory_hostname}}"
+        username: "{{username}}"
+        hostkey_verify: False
+        password: "{{password}}"
+        xml: "{{xml_template}}"

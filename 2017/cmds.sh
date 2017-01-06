@@ -7,7 +7,7 @@ case "$1" in
    ;;
 
 2) echo "ansible-playbook ios_template.yaml -i inventory --skip-tags deploy"
-   ansible-playbook ios_template.yaml -i inventory --skip-tags deploy, xml_deploy
+   ansible-playbook ios_template.yaml -i inventory --skip-tags "deploy,xml_deploy"
    ;;
 
 3) echo "ansible-playbook ios_template.yaml -i inventory"
@@ -18,8 +18,8 @@ case "$1" in
    ansible-playbook nc_example.yaml -i inventory
    ;;
 
-5) echo "ansible-playbook ios_template.yaml -i inventory"
-   ansible-playbook nc_template.yaml -i inventory --skip-tags deploy
+5) echo "ansible-playbook ios_template.yaml -i inventory --skip-tags depoy"
+   ansible-playbook ios_template.yaml -i inventory --skip-tags depoy
    ;;
 
 
