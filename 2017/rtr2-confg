@@ -1,0 +1,194 @@
+!
+! Last configuration change at 13:38:20 UTC Thu Nov 10 2016 by vagrant
+!
+version 16.3
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no platform punt-keepalive disable-kernel-core
+platform console auto
+!
+hostname rtr2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+enable secret 5 $1$OAMZ$DDrEWyP3OXFg4CFnNFm9r/
+enable password cisco
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+
+ip domain name dna.lab
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+!
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+netconf-yang cisco-odm actions parse.showACL
+netconf-yang cisco-odm actions parse.showBGP
+netconf-yang cisco-odm actions parse.showArchive
+netconf-yang cisco-odm actions parse.showIpRoute
+netconf-yang cisco-odm actions parse.showInterfaces
+netconf-yang cisco-odm actions parse.showEnvironment
+netconf-yang cisco-odm actions parse.showFlowMonitor
+netconf-yang cisco-odm actions parse.showBFDneighbors
+netconf-yang cisco-odm actions parse.showBridgeDomain
+netconf-yang cisco-odm actions parse.showProcessesCPU
+netconf-yang cisco-odm actions parse.showEfpStatistics
+netconf-yang cisco-odm actions parse.showLLDPneighbors
+netconf-yang cisco-odm actions parse.showVirtualService
+netconf-yang cisco-odm actions parse.showIPslaStatistics
+netconf-yang cisco-odm actions parse.showMPLSldpNieghbor
+netconf-yang cisco-odm actions parse.showProcessesMemory
+netconf-yang cisco-odm actions parse.showMemoryStatistics
+netconf-yang cisco-odm actions parse.showPlatformSoftware
+netconf-yang cisco-odm actions parse.showMPLSstaticBinding
+netconf-yang cisco-odm actions parse.showMPLSforwardingTable
+netconf-yang cisco-odm actions parse.showIpOspfDatabaseRouter
+netconf-yang cisco-odm actions parse.showEthernetCFMstatistics
+netconf-yang cisco-odm polling-enable
+netconf-yang
+restconf
+!
+username vagrant privilege 15 password 0 vagrant
+username cisco password 0 cisco
+!
+cdp run
+!
+redundancy
+!
+!
+!
+!
+!
+!
+ip tftp source-interface GigabitEthernet1
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip ssh pubkey-chain
+username vagrant
+key-string
+AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eW
+W6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o
+9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXP
+ITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pz
+C6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZE
+nDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXz
+cWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ==
+exit
+!
+!
+interface GigabitEthernet1
+ ip address dhcp
+ negotiation auto
+ no shut
+!
+interface GigabitEthernet2
+ ip address 172.20.20.20 255.255.255.0
+ negotiation auto
+ no shut
+!
+interface GigabitEthernet3
+ ip address 172.16.100.20 255.255.255.0
+ negotiation auto
+ no shut
+!
+!
+!
+router ospf 100
+ redistribute static metric 180 metric-type 1 subnets
+ network 172.16.100.20 0.0.0.0 area 0
+!
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+!
+ip route 193.168.0.0 255.255.255.0 172.20.20.100
+ip route 193.168.1.0 255.255.255.0 172.20.20.100
+ip route 193.168.2.0 255.255.255.0 172.20.20.100
+ip route 193.168.4.0 255.255.255.0 172.20.20.100
+ip route 199.18.10.0 255.255.255.0 172.20.20.100
+ip route 199.18.11.0 255.255.255.0 172.20.20.100
+ip route 199.18.12.0 255.255.255.0 172.20.20.100
+ip route 199.18.13.0 255.255.255.0 172.20.20.100
+!
+!
+!
+control-plane
+!
+ !
+ !
+ !
+ !
+!
+!
+!
+!
+!
+line con 0
+ stopbits 1
+line vty 0 4
+ login local
+!
+wsma agent exec
+profile WSMA
+!
+wsma agent config
+profile WSMA
+!
+!
+!
+!
+wsma profile listener WSMA
+ transport ssh
+!
+end
