@@ -30,13 +30,3 @@
   tags:
     - deploy
   when: inventory_hostname[-1] == "2"
-
-- name: set ntp server in the device
-  netconf_config_kev:
-    host: "{{inventory_hostname}}"
-    username: "{{username}}"
-    hostkey_verify: False
-    password: "{{password}}"
-    xml: "{{xml_template}}"
-  tags:
-    - xml_deploy
