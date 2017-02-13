@@ -30,20 +30,20 @@ track 1 list boolean and
  object 100
  object 101
 !
-track 100 interface GigabitEthernet0/1.{{external_net_vlan}} line-protocol
+track 100 interface GigabitEthernet3.{{external_net_vlan}} line-protocol
 !
 track 101 ip route 0.0.0.0 0.0.0.0 reachability
 !
 ip tcp path-mtu-discovery
 !
-interface GigabitEthernet0/1
+interface GigabitEthernet3
  description {{ item.tor_A_description }}
  no ip address
  cdp enable
  no shutdown
  !
 !
-interface GigabitEthernet0/1.{{external_net_vlan}}
+interface GigabitEthernet3.{{external_net_vlan}}
  encapsulation dot1Q {{external_net_vlan}}
  ip address {{ item.ext_ip }} {{ ext_netmask }}
  ip nat outside
@@ -54,7 +54,7 @@ interface GigabitEthernet0/1.{{external_net_vlan}}
  standby {{internal_net_vlan}} preempt
  standby {{internal_net_vlan}} track 1 decrement 100
 !
-interface GigabitEthernet0/1.{{internal_net_vlan}}
+interface GigabitEthernet3.{{internal_net_vlan}}
  description inside
  encapsulation dot1Q {{internal_net_vlan}}
  ip address {{ item.int_ip }} 255.255.255.0
@@ -68,13 +68,13 @@ interface GigabitEthernet0/1.{{internal_net_vlan}}
 !
 ip forward-protocol nd
 !
-ip ftp source-interface GigabitEthernet0/0
+ip ftp source-interface GigabitEthernet2
 no ip http server
 no ip http secure-server
-ip tftp source-interface GigabitEthernet0/0
-ip route 0.0.0.0 0.0.0.0 GigabitEthernet0/1.{{external_net_vlan}} {{ ext_gw_ip }}
+ip tftp source-interface GigabitEthernet2
+ip route 0.0.0.0 0.0.0.0 GigabitEthernet3.{{external_net_vlan}} {{ ext_gw_ip }}
 !
-ip ssh source-interface GigabitEthernet0/0
+ip ssh source-interface GigabitEthernet2
 ip ssh version 2
 ip ssh authentication-retries 2
 !
@@ -90,17 +90,17 @@ ip access-list standard snmppollers
 logging buffered 409600
 no logging console
 logging monitor informational
-logging source-interface GigabitEthernet0/0
+logging source-interface GigabitEthernet2
 logging host {{logging_server}}
 !
 snmp-server community {{ snmp_comm_string }} RO snmppollers
-snmp-server trap-source GigabitEthernet0/0
-snmp-server source-interface informs GigabitEthernet0/0
+snmp-server trap-source GigabitEthernet2
+snmp-server source-interface informs GigabitEthernet2
 snmp-server enable traps memory bufferpeak
 snmp-server enable traps hsrp
 snmp-server enable traps cpu threshold
 !
-ip radius source-interface GigabitEthernet0/0
+ip radius source-interface GigabitEthernet2
 !
 aaa new-model
 !
@@ -110,7 +110,7 @@ radius server sv2ise01
 !
 aaa group server radius ISE
  server name sv2ise01
- ip radius source-interface GigabitEthernet0/0
+ ip radius source-interface GigabitEthernet2
 !
 !
 line con 0

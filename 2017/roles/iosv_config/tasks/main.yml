@@ -8,15 +8,16 @@
   template:
     src: router_full.j2
     dest: "{{ config_output_directory }}/{{item.hostname}}.txt"
-  with_items: '{{[podiosv1[0],podiosv2[0]]}}'
+  with_items: '{{podiosv}}'
   run_once: true
 
+# split these out so config will match device
 - ios_template:
     host: "{{inventory_hostname}}"
     username: "{{username}}"
     password: "{{password}}"
     src: "router_full.j2"
-  with_items: '{{podiosv1}}'
+  with_items: '{{podiosv[0]}}'
   tags:
     - deploy
   when: inventory_hostname[-1] == "1"
@@ -26,7 +27,7 @@
     username: "{{username}}"
     password: "{{password}}"
     src: "router_full.j2"
-  with_items: '{{podiosv2}}'
+  with_items: '{{podiosv[1]}}'
   tags:
     - deploy
   when: inventory_hostname[-1] == "2"
