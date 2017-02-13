@@ -5,8 +5,8 @@ vrf_template: |
     <native xmlns="http://cisco.com/ns/yang/ned/ios" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
       <ip>
         <vrf>
-          <name>{{ item['vrf_name'] }}</name>
-          <rd>{{item['vrf_id']}}:{{item['vrf_id']}}</rd>
+          <name>{{ item['tenant_name'] }}</name>
+          <rd>{{item['tenant_id']}}:{{item['tenant_id']}}</rd>
         </vrf>
       </ip>
     </native>
@@ -28,7 +28,7 @@ int_template: |
           <ip-vrf>
             <ip>
               <vrf>
-                <forwarding>{{item['vrf_name']}}</forwarding>
+                <forwarding>{{item['tenant_name']}}</forwarding>
               </vrf>
             </ip>
           </ip-vrf>
