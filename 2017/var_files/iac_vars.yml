@@ -1,8 +1,8 @@
 ---
 
 fabric:
-  - vrf_name: VRF-DEVELOPMENT
-    vrf_id: 103
+  - tenant_name: DEVELOPMENT
+    tenant_id: 103
     ints:
       - vlan_id: 3240
         name: "10_103_240_0-DATA"
@@ -10,8 +10,8 @@ fabric:
       - vlan_id: 3241
         name: "10_103_241_0-VOICE"
         subnet: "10.103.241.0/24"
-  - vrf_name: VRF-IOT
-    vrf_id: 102
+  - tenant_name: IOT
+    tenant_id: 102
     ints:
       - vlan_id: 2240
         name: "10_102_240_0-DATA"
@@ -19,8 +19,8 @@ fabric:
       - vlan_id: 2241
         name: "10_102_241_0-VOICE"
         subnet: "10.102.241.0/24"
-  - vrf_name: VRF-EMPLOYEE
-    vrf_id: 101
+  - tenant_name: EMPLOYEE
+    tenant_id: 101
     ints:
       - vlan_id: 1240
         name: "10_101_240_0-DATA"
