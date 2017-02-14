@@ -31,9 +31,9 @@ radius_server: 3.3.3.3
 snmp_server: 4.4.4.4
 
 # Device Variables
-podiosv:
+podcsr:
   - device_type: "iosv"
-    hostname: "{{ site_name }}-asr1"
+    device_name: "{{ site_name }}-asr1"
     po1_description: "ASR1-N9K1"
     tor_A_description: "tor1 e1/47"
     tor_B_description: "tor1 e1/48"
@@ -41,7 +41,7 @@ podiosv:
     int_ip: "{{ int_asr1_ip }}"
     hsrp_priority: 150
   - device_type: "iosv"
-    hostname: "{{ site_name }}-asr2"
+    device_name: "{{ site_name }}-asr2"
     po1_description: "ASR2-N9K2"
     tor_A_description: "tor2 e1/47"
     tor_B_description: "tor2 e1/48"

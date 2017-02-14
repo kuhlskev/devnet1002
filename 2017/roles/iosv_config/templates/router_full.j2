@@ -7,15 +7,7 @@ service timestamps log datetime msec show-timezone
 service password-encryption
 no service dhcp
 !
-hostname {{ item.hostname }}
-!
-vrf definition service
- !
- address-family ipv4
- exit-address-family
- !
- address-family ipv6
- exit-address-family
+hostname {{ item.device_name }}
 !
 username admin secret {{ admin_password }}
 !
@@ -100,31 +92,6 @@ snmp-server enable traps memory bufferpeak
 snmp-server enable traps hsrp
 snmp-server enable traps cpu threshold
 !
-ip radius source-interface GigabitEthernet2
-!
-aaa new-model
-!
-radius server sv2ise01
- address ipv4 {{radius_server}} auth-port 1645 acct-port 1646
- key {{ radius_key }}
-!
-aaa group server radius ISE
- server name sv2ise01
- ip radius source-interface GigabitEthernet2
-!
-!
-line con 0
- logging synchronous
- login authentication CONSOLE
- transport output none
-line vty 0 15
- access-class rfc1918 in vrf-also
- exec-timeout 30 0
- transport preferred none
- transport input ssh
-!
 exception crashinfo maximum files 5
 !
 access-list 11 permit {{mgmt_network_cidr | ipaddr('network')}} 0.0.0.255
-
-!
