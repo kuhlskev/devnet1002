@@ -6,7 +6,7 @@
 
 Vagrant.configure("2") do |config|
     config.vm.define "rtr1" do |node|
-      node.vm.box = "iosxe"
+      node.vm.box = "iosxe1002"
       node.vm.network "private_network", 
         ip: "172.20.20.10",
         auto_config: false
@@ -31,7 +31,7 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.define "rtr2" do |node|
-      node.vm.box = "iosxe"
+      node.vm.box = "iosxe1002"
       node.vm.network "private_network", 
         ip: "172.20.20.20",
         auto_config: false
