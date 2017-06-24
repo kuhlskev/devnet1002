@@ -2,7 +2,7 @@
 
 vrf_template: |
   <config xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0">
-    <native xmlns="http://cisco.com/ns/yang/ned/ios" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+    <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
       <ip>
         <vrf>
           <name>{{ item['tenant_name'] }}</name>
@@ -14,7 +14,7 @@ vrf_template: |
 
 int_template: |
   <config xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0">
-    <native xmlns="http://cisco.com/ns/yang/ned/ios" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+    <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
       <interface>
        {% for interface in item['ints'] %}
         <GigabitEthernet>

@@ -15,13 +15,13 @@
         password: "{{password}}"
         xml: |
             <config xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0">
-              <native xmlns="http://cisco.com/ns/yang/ned/ios" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+              <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
                 <ntp>
-                    <server>
-                      <server-list>
-                        <ip-address>5.5.5.7</ip-address>
-                      </server-list>
-                    </server>
+                  <server xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-ntp">
+                    <server-list>
+                      <ip-address>5.5.5.7</ip-address>
+                    </server-list>
+                  </server>
                 </ntp>
               </native>
             </config>
