@@ -10,7 +10,7 @@
   tasks:
 
     - name: set ntp server via NETCONF with template
-      netconf_config_kev:
+      netconf_config:
         host: "{{inventory_hostname}}"
         username: "{{username}}"
         hostkey_verify: False

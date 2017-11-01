@@ -10,7 +10,7 @@
   tasks:
 
     - name: configure vrf
-      netconf_config_kev:
+      netconf_config:
         host: "{{inventory_hostname}}"
         username: "{{username}}"
         hostkey_verify: False
@@ -18,7 +18,7 @@
         xml: "{{vrf_template}}"
       with_items: "{{fabric}}" 
     - name: configure interfaces
-      netconf_config_kev:
+      netconf_config:
         host: "{{inventory_hostname}}"
         username: "{{username}}"
         hostkey_verify: False
