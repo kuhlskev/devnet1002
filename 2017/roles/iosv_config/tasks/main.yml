@@ -4,32 +4,18 @@
     path: "{{ config_output_directory }}"
     state: directory
 
+# You can iterate through via Variable
 - name: Generate ASR Configuration Files
   template:
-    src: router_full.j2
+    src: router_full.j2.with_items
     dest: "{{ config_output_directory }}/{{item.device_name}}.txt"
   with_items: '{{podcsr}}'
   run_once: true
-
-# split these out so config will match device
+# Or use host_vars to iterate through the hosts
 - ios_config:
     host: "{{inventory_hostname}}"
     username: "{{username}}"
     password: "{{password}}"
     src: "router_full.j2"
-  with_items: 
-    - "{{podcsr[0]}}"
   tags:
     - deploy
-  when: inventory_hostname[-2] == "1"
-
-- ios_config:
-    host: "{{inventory_hostname}}"
-    username: "{{username}}"
-    password: "{{password}}"
-    src: "router_full.j2"
-  with_items: 
-    - "{{podcsr[1]}}"
-  tags:
-    - deploy
-  when: inventory_hostname[-2] == "2"
