@@ -6,7 +6,7 @@
 
 Vagrant.configure("2") do |config|
     config.vm.define "rtr1" do |node|
-      node.vm.box = "iosxe/csr1kv.16.5.1b"
+      node.vm.box = "iosxe16.5.0"
       node.vm.network "private_network", 
         ip: "172.20.20.10",
         auto_config: false
@@ -31,7 +31,7 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.define "rtr2" do |node|
-      node.vm.box = "iosxe/csr1kv.16.5.1b"
+      node.vm.box = "iosxe16.5.0"
       node.vm.network "private_network", 
         ip: "172.20.20.20",
         auto_config: false
@@ -54,23 +54,23 @@ Vagrant.configure("2") do |config|
         #]
       end
     end
-    config.vm.define "jh" do |node|
-      node.vm.box = "ubuntu/trusty64"
-      #node.vm.box_version = "20160610.0.0"
-      node.vm.box_check_update = false
-      node.vm.provider :virtualbox do |v|
-        v.customize ["modifyvm", :id, "--memory", 1024]
-      end
-      node.vm.synced_folder ".", "/home/vagrant"
-      node.vm.provision "shell", inline: <<-SHELL
-        sudo apt-get update
-        sudo apt-get install build-essential libssl-dev libffi-dev libyaml-dev python-dev python-pip -y
-        sudo pip install --upgrade pip
-        sudo pip install --upgrade ndg-httpsclient
-        sudo pip install -r /home/vagrant/requirements.txt
-        sudo pip install --upgrade setuptools --user python
-        sudo pip install ciscoconfparse
-        echo "cd /home/vagrant/nestconf" >> /home/vagrant/.bash_profile
-      SHELL
-    end
+#    config.vm.define "jh" do |node|
+#      node.vm.box = "ubuntu/trusty64"
+#      #node.vm.box_version = "20160610.0.0"
+#      node.vm.box_check_update = false
+#      node.vm.provider :virtualbox do |v|
+#        v.customize ["modifyvm", :id, "--memory", 1024]
+#      end
+#      node.vm.synced_folder ".", "/home/vagrant"
+#      node.vm.provision "shell", inline: <<-SHELL
+#        sudo apt-get update
+#        sudo apt-get install build-essential libssl-dev libffi-dev libyaml-dev python-dev python-pip -y
+#        sudo pip install --upgrade pip
+#        sudo pip install --upgrade ndg-httpsclient
+#        sudo pip install -r /home/vagrant/requirements.txt
+#        sudo pip install --upgrade setuptools --user python
+#        sudo pip install ciscoconfparse
+#        echo "cd /home/vagrant/nestconf" >> /home/vagrant/.bash_profile
+#      SHELL
+#    end
 end

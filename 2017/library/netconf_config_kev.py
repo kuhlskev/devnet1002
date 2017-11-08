@@ -171,7 +171,7 @@ def main():
     if not HAS_NCCLIENT:
         module.fail_json(msg='could not import the python library '
                          'ncclient required by this module')
-
+    module.fail_json(msg='stuff' + str(type(module.params['xml'])) + module.params['xml'])
     try:
         xml.dom.minidom.parseString(module.params['xml'])
     except:
