@@ -3,7 +3,7 @@ site_name: devnet1002
 external_net_cidr: 192.168.250.0/24
 external_net_vlan: 10
 internal_net_vlan: 20
-int_network_cidr: 192.16.1.0/24
+internal_net_cidr: 192.16.1.0/24
 mgmt_network_cidr: 198.18.1.0/24
 
 #Credentials
@@ -18,10 +18,10 @@ ext_asr1_ip: "{{ external_net_cidr | ipaddr('5') | ipaddr('address') }}"
 ext_asr2_ip: "{{ external_net_cidr | ipaddr('6') | ipaddr('address') }}"
 ext_gw_ip: "{{ external_net_cidr | ipaddr('1') | ipaddr('address') }}"
 ext_netmask: "{{ external_net_cidr | ipaddr('netmask') }}"
-int_asr_vip: "{{ external_net_cidr | ipaddr('1') | ipaddr('address') }}"
-int_asr1_ip: "{{ external_net_cidr | ipaddr('2') | ipaddr('address') }}"
-int_asr2_ip: "{{ external_net_cidr | ipaddr('3') | ipaddr('address') }}"
-int_netmask: "{{ external_net_cidr | ipaddr('netmask') }}"
+int_asr_vip: "{{ internal_net_cidr | ipaddr('1') | ipaddr('address') }}"
+int_asr1_ip: "{{ internal_net_cidr | ipaddr('2') | ipaddr('address') }}"
+int_asr2_ip: "{{ internal_net_cidr | ipaddr('3') | ipaddr('address') }}"
+int_netmask: "{{ internal_net_cidr | ipaddr('netmask') }}"
 
 # General Variables
 config_output_directory: "{{ playbook_dir }}/config_output/{{ site_name }}"
