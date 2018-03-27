@@ -1,0 +1,9 @@
+vlan_list_local:
+  - vlan_id: 21
+    name: User21
+  - vlan_id: 22
+    name: User22
+  - vlan_id: 23
+    name: User23
+
+vlan_list: "{{ vlan_list_local }} + {{ vlan_list_all }}"
