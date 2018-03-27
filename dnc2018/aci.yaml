@@ -1,0 +1,20 @@
+---
+- name: Sample ACI config
+  hosts: aci
+  connection: local
+  gather_facts: True
+  vars_files:
+    - var_files/vars.yml
+
+  tasks:
+    - name: Add a new EPG
+      aci_epg:
+        hostname: "{{inventory_hostname}}"
+        username: "{{username}}"
+        password: "{{password}}"
+        tenant: SnV
+        ap: Chaos
+        epg: DNC_epg
+        description: Web Intranet EPG
+        bd: anitgravity
+        validate_certs: false
