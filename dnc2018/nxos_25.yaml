@@ -1,0 +1,30 @@
+---
+- name: leaf configuration
+  hosts: nxos
+  vars_files:
+    - var_files/nxos.yml
+
+  tasks:
+
+  ############################################################
+  #  VLAN CONFIGURATION
+  ############################################################
+
+  - name: Configure VLANs as defined in vars and host_vars
+    nxos_vlan:
+      aggregate: "{{ vlan_list }}"
+      state: present
+      purge: yes
+
+  #############################################################
+  # Layer 2 switchport configs
+  #############################################################
+  - name: L2 config for uplinks
+    nxos_interface:
+      aggregate: "{{l2_ports}}"
+      mode: layer2
+      admin_state: up
+
+  - name: Trunk config for uplinks
+    nxos_l2_interface:
+      aggregate: "{{trunk_ports}}"
