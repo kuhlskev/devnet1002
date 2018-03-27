@@ -1,0 +1,7 @@
+ansible_connection: network_cli
+ansible_become: yes
+ansible_become_method: enable
+ansible_network_os: ios
+ansible_user: "{{csr_username}}"
+ansible_ssh_pass: "{{csr_password}}"
+ansible_port: 8181
