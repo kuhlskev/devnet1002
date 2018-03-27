@@ -18,11 +18,15 @@ case "$1" in
    ansible-playbook nxos.yaml -i inventory
    ;;
 
-5) echo "ansible-playbook ucs.yaml -i inventory"
+5) echo "ansible-playbook aci.yaml -i inventory"
+   ansible-playbook aci.yaml -i inventory
+   ;;
+
+6) echo "ansible-playbook ucs.yaml -i inventory"
    ansible-playbook ucs.yaml -i inventory
    ;;
 
-6) echo "ansible-playbook iac.yaml -i inventory"
+7) echo "ansible-playbook iac.yaml -i inventory"
    ansible-playbook iac.yaml -i inventory
    ;;
 
