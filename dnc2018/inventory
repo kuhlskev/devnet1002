@@ -6,7 +6,7 @@ ansible_python_interpreter = /usr/bin/python
 #172.20.20.10
 #172.20.20.20
 #always-on for dnc
-ios-xe-mgmt.cisco.com 
+ios-xe-mgmt.cisco.com ansible_port=8181
 #password D_Vay!_10&
 
 [aci]
@@ -36,3 +36,13 @@ ios-xe-mgmt.cisco.com
 
 [xrv]
 #only for clus
+
+[DCA:children]
+podiosv
+aci
+centos
+ucsm
+nxos
+
+[l]
+127.0.0.1

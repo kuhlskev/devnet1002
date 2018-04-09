@@ -1,0 +1,54 @@
+---
+#- name: Block to setup
+  #block:
+  - name: Add a new Tenant
+    aci_tenant:
+      hostname: "{{inventory_hostname}}"
+      username: "{{username}}"
+      password: "{{password}}"
+      tenant: "{{item['tenant_name']}}"
+      description: Production tenant
+      state: present
+      validate_certs: false
+    with_items: "{{fabric}}"
+  
+  - name: Add a new VRF to a tenant
+    aci_vrf:
+      hostname: "{{inventory_hostname}}"
+      username: "{{username}}"
+      password: "{{password}}"
+      vrf: "{{item['tenant_name']}}-vrf"
+      tenant: "{{item['tenant_name']}}"
+      state: present  
+      validate_certs: false
+    with_items: "{{fabric}}"
+
+  - name: Add Bridge Domains
+    aci_bd:
+      host: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      state: present
+      tenant: "{{item[0]['tenant_name']}}"
+      bd: "{{item[1]['name']}}-bd"
+      vrf: "{{item[0]['tenant_name']}}-vrf"
+    with_subelements: 
+      - "{{fabric}}"
+      - ints 
+
+  - name: Add Subnet to Bridge Domains
+    aci_bd_subnet:
+      host: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      tenant: "{{item[0]['tenant_name']}}"
+      bd: "{{item[1]['name']}}-bd"
+      gateway: "{{ item[1]['subnet'] | ipaddr('1') | ipaddr('address') }}"
+      mask: "{{ item[1]['subnet'] | ipaddr('prefix') }}"
+    with_subelements: 
+      - "{{fabric}}"
+      - ints 
+
+
