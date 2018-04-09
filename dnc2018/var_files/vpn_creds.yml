@@ -1,90 +1,61 @@
-pod1:
-  username: v130user1 
-  password: f98d85
-pod2:  
-  username: v129user1 
-  password: cd8177
-pod3:  
-  username: v132user1 
-  password: d44cbc
-pod4:  
-  username: v187user1 
-  password: 2d0919
-pod5:  
-  username: v198user1 
-  password: 62a971
-pod6:  
-  username: v215user1 
-  password: b59ffd
-pod7:  
-  username: v206user1 
-  password: ce5a54
-pod8:  
-  username: v194user1 
-  password: dc9af3
-pod9:  
-  username: v242user1 
-  password: 92451
-pod10:  
-  username: v335user1 
-  password: 5aa769
-pod11:  
-  username: v413user1 
-  password: f09cce
-pod12:  
-  username: v449user1 
-  password: 2ff00f
-pod13:  
-  username: v458user1 
-  password: 56379a
-pod14:  
-  username: v617user1 
-  password: e2b404
-pod15:  
-  username: v659user1 
-  password: cba86d
-pod16:  
-  username: v788user1 
-  password: 80e493
-pod17:  
-  username: v416user1 
-  password: a0d5bf
-pod18:  
-  username: v653user1 
-  password: 1cf3ce
-pod19:  
-  username: v914user1 
-  password: 323626
-pod20:  
-  username: v998user1 
-  password: 7fa1b9
-pod21:  
-  username: v982user1 
-  password: 73e30f
-pod22:  
-  username: v1060user1
-  password: b849df
-pod23:  
-  username: v1071user1
-  password: ed74f6
-pod24:  
-  username: v1133user1
-  password: 7b4c0f
-pod25:  
-  username: v1123user1
-  password: b6075f
-pod26:  
-  username: v1267user1
-  password: d2b8fa
-pod27:  
-  username: v1315user1
-   password: 1b97af
-pod28:  
-  username: v1390user1
-  password: b892ab
-pod29:  
-  username: v1410user1
-  password: 858221
-pod30:  
-  username: v1461user1
-  password: ed93c8 
+pods:
+  - username: v130user1 
+    password: f98d85  
+  - username: v129user1 
+    password: cd8177  
+  - username: v132user1 
+    password: d44cbc 
+  - username: v187user1 
+    password: 2d0919 
+  - username: v198user1 
+    password: 62a971  
+  - username: v215user1 
+    password: b59ffd
+  - username: v206user1 
+    password: ce5a54 
+  - username: v194user1 
+    password: dc9af3
+  - username: v242user1 
+    password: 92451
+  - username: v335user1 
+    password: 5aa769
+  - username: v413user1 
+    password: f09cce
+  - username: v449user1 
+    password: 2ff00f
+  - username: v458user1 
+    password: 56379a
+  - username: v617user1 
+    password: e2b404
+  - username: v659user1 
+    password: cba86d
+  - username: v788user1 
+    password: 80e493
+  - username: v416user1 
+    password: a0d5bf
+  - username: v653user1 
+    password: 1cf3ce 
+  - username: v914user1 
+    password: 323626
+  - username: v998user1 
+    password: 7fa1b9
+  - username: v982user1 
+    password: 73e30f 
+  - username: v1060user1
+    password: b849df
+  - username: v1071user1
+    password: ed74f6
+  - username: v1133user1
+    password: 7b4c0f
+  - username: v1123user1
+    password: b6075f
+  - username: v1267user1
+    password: d2b8fa 
+  - username: v1315user1
+    password: 1b97af 
+  - username: v1390user1
+    password: b892ab  
+  - username: v1410user1
+    password: 858221 
+  - username: v1461user1
+    password: ed93c8 
