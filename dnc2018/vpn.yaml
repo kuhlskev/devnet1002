@@ -1,0 +1,18 @@
+---
+- name: Sample UCS config
+  hosts: l
+  connection: local
+  gather_facts: True
+  vars_files:
+    - var_files/vpn_creds.yml
+    - var_files/vars.yml
+  tasks:
+
+    - name: "Hi! Here is my hostname:"
+      debug: msg="{{ansible_hostname}}"
+    - debug: msg="pod{{pod}}['username']"
+
+    - name: "One second! I'm getting interface data."
+      command: "openconnect dcloud-sjc-anyconnect.cisco.com -b --servercert sha256:8951b2d47d8edefcfa875e0bc253418fd6be7
+294a5dce76f071e6bad258d67fe --no-dtls -q -u {{pods[pod]['username']}} -p {{pods[pod]['password']}}"
+
