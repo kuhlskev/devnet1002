@@ -25,5 +25,5 @@
       - name: "Here are my routes:"
         debug: msg="{{routes}}"
 
-      - pip:
-          name: ucsmsdk
+     # - pip:
+     #     name: ucsmsdk

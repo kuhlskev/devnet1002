@@ -1,0 +1,10 @@
+---
+  ###########################################################
+  #            Playbook to query dCloud servers             #
+  ###########################################################
+  - name: Install UCSMSDK
+    hosts: linux
+
+    tasks:
+      - pip:
+          name: ucsmsdk
