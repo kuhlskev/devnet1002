@@ -4,6 +4,6 @@ csr_password: 'D_Vay!_10&'
 username: admin
 password: C1sco12345
 
-pod: 2 
+pod: 0 
 ntp3: 3.3.3.3
 ntp4: 4.4.4.4
