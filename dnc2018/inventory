@@ -1,13 +1,19 @@
 [all:vars]
 ansible_connection=local
 ansible_python_interpreter = /usr/bin/python
+ansible_user = admin
+ansible_password = C1sco12345
 
 [podiosv]
 #172.20.20.10
 #172.20.20.20
 #always-on for dnc
 ios-xe-mgmt.cisco.com ansible_port=8181
-#password D_Vay!_10&
+
+#[podiosv:vars]
+#ansible_username = admin
+#ansible_password = D_Vay!_10&
+#ansible_port=8181
 
 [aci]
 198.18.133.200
@@ -43,6 +49,17 @@ aci
 centos
 ucsm
 nxos
+
+[DCI:children]
+aci
+centos
+ucsm
+nxos
+
+[DCI:vars]
+ansible_connection = local
+username = admin
+password = C1sco12345
 
 [l]
 127.0.0.1

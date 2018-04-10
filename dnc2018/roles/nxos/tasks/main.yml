@@ -1,21 +1,73 @@
 ---
-- name: Create config output directory
-  file:
-    path: "{{ config_output_directory }}"
-    state: directory
 
-# You can iterate through via Variable
-- name: Generate ASR Configuration Files
-  template:
-    src: router_full.j2.with_items
-    dest: "{{ config_output_directory }}/{{item.device_name}}.txt"
-  with_items: '{{podcsr}}'
-  run_once: true
-# Or use host_vars to iterate through the hosts
-- ios_config:
-    host: "{{inventory_hostname}}"
-    username: "{{username}}"
-    password: "{{password}}"
-    src: "router_full.j2"
-  tags:
-    - deploy
+############################################################
+#  VLAN CONFIGURATION
+############################################################
+  - name: Configure VLANs as defined in IAC
+    nxos_vlan:
+      #host: "{{inventory_hostname}}"
+      #username: "{{username}}"
+      #password: "{{password}}"     
+      vlan_id: "{{item[1]['vlan_id']}}"
+      state: present
+    with_subelements: 
+      - "{{fabric}}"
+      - ints 
+
+#############################################################
+# Layer 3 Configuration
+#############################################################
+
+  - name: ensure VRF are created
+    nxos_vrf:
+      #hostname: "{{inventory_hostname}}"
+      #username: "{{username}}"
+      #password: "{{password}}"
+      vrf: "{{item['tenant_name']}}-vrf"
+      state: present  
+      validate_certs: false
+    with_items: "{{fabric}}"
+
+  - name: Add Bridge Domains
+    nxos_interface:
+      #host: "{{ inventory_hostname }}"
+      #username: "{{ username }}"
+      #password: "{{ password }}"
+      validate_certs: no
+      state: present
+      interface: "{{item[1]['name']}}-bd"
+      vrf: "{{item[0]['tenant_name']}}-vrf"
+    with_subelements: 
+      - "{{fabric}}"
+      - ints 
+
+  - name: Assign interfaces to VRF declaratively
+    nxos_vrf_interface:
+      #hostname: "{{inventory_hostname}}"
+      validate_certs: no
+      vrf: "{{item[0]['tenant_name']}}-vrf"
+      interface: "{{item[1]['name']}}-bd"
+    with_subelements: 
+      - "{{fabric}}"
+      - ints 
+
+# if doing both then need to have var for ip's 2,3 in subnet,
+# could do a when inside the var 'ip_addr'
+  - name: assign IP addresses
+    nxos_l3_interface: 
+      #host: "{{ inventory_hostname }}"
+      #username: "{{ username }}"
+      #password: "{{ password }}"
+      validate_certs: no
+      interface: "{{item[1]['name']}}-bd"
+      ip_v4: "{{ item[1]['subnet'] | ipaddr('1') | ipaddr('address')}}/{{item[1]['subnet'] | ipaddr('prefix') }}"
+    with_subelements: 
+      - "{{fabric}}"
+      - ints 
+
+
+#- name: config HSRP
+#  nxos_hsrp: group={{ item.group }} interface={{ item.interface }} vip={{ item.vip }} priority={{ hsrp_priority }} host={{ inventory_hostname }}
+#  with_items: hsrp
+
+

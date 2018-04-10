@@ -1,5 +1,5 @@
 ---
-- name: Sample UCS config
+- name: Connect to Pod
   hosts: 127.0.0.1
   connection: local
   gather_facts: True
