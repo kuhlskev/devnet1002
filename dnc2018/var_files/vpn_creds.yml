@@ -1,4 +1,6 @@
 pods:
+  - username: fake_user
+    password: dont_use
   - username: v130user1 
     password: f98d85  
   - username: v129user1 
