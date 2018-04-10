@@ -15,13 +15,6 @@
     - name: ensure VLANs exist on switches
       nxos_vlan: vlan_range="2-19,99" state=present host={{ inventory_hostname }} username={{ username }} password={{ password }}
 
-    - name: ensure names exist for important vlans
-      nxos_vlan: vlan_id={{ item.vlan_id }} name={{ item.name }} host={{ inventory_hostname }} state=present username={{ username }} password={{ password }}
-      with_items:
-        - { vlan_id: 10, name: test_segment }
-        - { vlan_id: 99, name: native }
-
-
     #############################################################
     # Layer 2 switchport configs
     #############################################################
@@ -30,3 +23,9 @@
       with_items:
         - Ethernet1/49
         - Ethernet1/50
+
+    - name: assign IP addresses
+      nxos_l3_interface: 
+        validate_certs: no
+        name: vlan3241
+        ipv4: 1.1.1.1/24
