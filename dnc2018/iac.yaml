@@ -5,16 +5,16 @@
   connection: local
   tasks:
     - debug: var=inventory_hostname
-#  roles:
-#    - aci
+  roles:
+    - aci
 
 - name: UCS
   hosts: ucsm
   connection: local
   tasks:
     - debug: var=inventory_hostname
-#  roles:
-#    - ucs
+  roles:
+    - ucs
 
 - name: NXOS
   hosts: nxos

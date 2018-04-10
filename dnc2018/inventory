@@ -43,6 +43,13 @@ ios-xe-mgmt.cisco.com ansible_port=8181
 [xrv]
 #only for clus
 
+[l]
+127.0.0.1
+
+[linux:children]
+centos
+l
+
 [DCA:children]
 podiosv
 aci
@@ -61,5 +68,3 @@ ansible_connection = local
 username = admin
 password = C1sco12345
 
-[l]
-127.0.0.1

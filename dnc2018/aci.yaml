@@ -7,14 +7,12 @@
     - var_files/vars.yml
 
   tasks:
-    - name: Add a new EPG
-      aci_epg:
-        hostname: "{{inventory_hostname}}"
-        username: "{{username}}"
-        password: "{{password}}"
-        tenant: SnV
-        ap: Chaos
-        epg: DNC_epg
-        description: Web Intranet EPG
-        bd: anitgravity
-        validate_certs: false
+  - name: Add a new Tenant
+    aci_tenant:
+      hostname: "{{inventory_hostname}}"
+      username: "{{username}}"
+      password: "{{password}}"
+      tenant: DevNetCreate
+      description: Awesome tenant
+      state: present
+      validate_certs: false

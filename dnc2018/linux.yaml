@@ -3,7 +3,7 @@
   #            Playbook to query dCloud servers             #
   ###########################################################
   - name: Retrieve facts and information from dCloud servers
-    hosts: centos
+    hosts: linux
 
     tasks:
       - name: "Hi! Here is my hostname:"
@@ -12,24 +12,11 @@
       - name: "The time according to me is:"
         debug: msg="{{ansible_date_time.iso8601}}"
 
-      - name: "I'm using the following interface for management:"
-        debug: msg="{{ansible_default_ipv4.interface}}"
-
-      - name: "Here is my interface logical addressing:"
-        debug: msg="{{ansible_default_ipv4.macaddress}}, {{ansible_default_ipv4.address}}"
-
       - name: "Here is my OS:"
         debug: msg="{{ansible_distribution}}"
 
       - name: "Here is my kernel version:"
         debug: msg="{{ansible_kernel}}"
-
-      - name: "One second! I'm getting interface data."
-        command: "ifconfig -a"
-        register: interfaces
-
-      - name: "Here is my interface information:"
-        debug: msg="{{interfaces}}"
 
       - name: "One second! I'm getting my routes."
         command: "netstat -rn"
@@ -37,3 +24,6 @@
 
       - name: "Here are my routes:"
         debug: msg="{{routes}}"
+
+      - pip:
+          name: ucsmsdk
