@@ -42,8 +42,8 @@ ucs) echo "ansible-playbook ucsm-sdk.yaml"
    ansible-playbook ucsm-sdk.yaml
    ;;
 
-pip) echo "pip install –upgrade ansible xlrd ucsmsdk xmltodict netaddr"\
-   pip install –upgrade ansible xlrd ucsmsdk xmltodict netaddr 
+pip) echo "pip install –upgrade ansible xlrd xmltodict netaddr"\
+   pip install –upgrade ansible xlrd xmltodict netaddr 
    ;;
    
 esac
