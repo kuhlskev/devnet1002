@@ -42,11 +42,11 @@ vpn) echo "ansible-playbook vpn.yaml"
    ansible-playbook vpn.yaml
    ;;
 
-ucs) echo "ansible-playbook ucsm-sdk.yaml"
-   ansible-playbook ucsm-sdk.yaml
+ucs) echo "ansible-playbook ucsmsdk.yaml"
+   ansible-playbook ucsmsdk.yaml
    ;;
 
-pip) echo "pip install --upgrade ansible xlrd xmltodict netaddr"\
+pip) echo "pip install --upgrade ansible xlrd xmltodict netaddr"
    pip install --upgrade ansible xlrd xmltodict netaddr 
    ;;
    
