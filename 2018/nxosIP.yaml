@@ -1,0 +1,16 @@
+---
+
+- name: leaf configuration
+  hosts: nxos
+  connection: local
+  gather_facts: no
+  vars_files:
+    - var_files/vars.yml
+
+  tasks:
+
+    - name: assign IP addresses
+      nxos_l3_interface: 
+        validate_certs: no
+        name: vlan3241
+        ipv4: 1.1.1.1/24

@@ -1,0 +1,15 @@
+---
+- name: Configure IPv4 address pools
+  ucs_ip_pool:
+    hostname: "{{inventory_hostname}}"
+    username: "{{username}}"
+    password: "{{password}}"
+    name: "{{item[1]['name']}}-bd"
+    order: sequential
+    first_addr: "{{ item[1]['subnet'] | ipaddr('10') | ipaddr('address') }}"
+    last_addr: "{{ item[1]['subnet'] | ipaddr('20') | ipaddr('address') }}"
+    subnet_mask: "{{ item[1]['subnet'] | ipaddr('netmask') }}"
+    default_gw: "{{ item[1]['subnet'] | ipaddr('1') | ipaddr('address') }}"
+  with_subelements: 
+      - "{{fabric}}"
+      - ints 

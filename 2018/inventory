@@ -1,0 +1,45 @@
+[all:vars]
+ansible_connection=local
+ansible_python_interpreter = /usr/bin/python
+ansible_user = admin
+ansible_password = C1sco12345
+
+[podiosv]
+172.20.20.10
+#172.20.20.20
+
+#always-on
+[csr_ao]
+ios-xe-mgmt.cisco.com
+
+[csr_ao:vars]
+ansible_user=root
+ansible_ssh_pass=D_Vay!_10&
+ansible_port=8181
+
+[aci]
+198.18.133.200
+
+#always-on
+[aci_ao]
+sandboxapicdc.cisco.com
+
+[aci_ao:vars]
+ansible_user=admin
+ansible_password=ciscopsdt
+
+[nxos]
+198.18.134.140
+198.18.134.141
+
+#always on
+[nxos_ao]
+sbx-nxos-mgmt.cisco.com
+
+[nxos_ao:vars]
+ansible_username = admin
+ansible_password = Admin_1234!
+ansible_port=8181
+nc_port=10000
+
+
