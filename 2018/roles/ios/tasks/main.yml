@@ -1,21 +1,19 @@
 ---
-- name: Create config output directory
-  file:
-    path: "{{ config_output_directory }}"
-    state: directory
-
-# You can iterate through via Variable
-- name: Generate ASR Configuration Files
-  template:
-    src: router_full.j2.with_items
-    dest: "{{ config_output_directory }}/{{item.device_name}}.txt"
-  with_items: '{{podcsr}}'
-  run_once: true
-# Or use host_vars to iterate through the hosts
-- ios_config:
-    host: "{{inventory_hostname}}"
-    username: "{{username}}"
-    password: "{{password}}"
-    src: "router_full.j2"
-  tags:
-    - deploy
+  - debug: msg="{{ansible_user}}"
+  - debug: msg="{{ansible_ssh_pass}}"
+  - name: configure vrf
+    netconf_config:
+      host: "{{inventory_hostname}}"
+      username: "{{ansible_user}}"
+      hostkey_verify: False
+      password: "{{ansible_ssh_pass}}"
+      xml: "{{vrf_template}}"
+    with_items: "{{fabric}}" 
+  - name: configure interfaces
+    netconf_config:
+      host: "{{inventory_hostname}}"
+      username: "{{ansible_user}}"
+      hostkey_verify: False
+      password: "{{ansible_ssh_pass}}"
+      xml: "{{int_template}}"
+    with_items: "{{fabric}}"

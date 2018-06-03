@@ -1,13 +1,13 @@
 # Configure connection details for NXOS devices
-ansible_connection: network_cli
-ansible_network_os: nxos
-ansible_user: "admin"
-ansible_ssh_pass: "C1sco12345"
-ansible_become: yes
-ansible_become_method: enable
+#ansible_connection: network_cli
+#ansible_network_os: nxos
+#ansible_user: "vagrant"
+#ansible_ssh_pass: "vagrant"
+#ansible_become: yes
+#ansible_become_method: enable
 
 #List all global VLANs
-vlan_list_all:
+vlan_list:
   - vlan_id: 1
   - vlan_id: 10
     name: test_segment

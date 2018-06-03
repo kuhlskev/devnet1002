@@ -8,6 +8,12 @@ ansible_password = C1sco12345
 172.20.20.10
 #172.20.20.20
 
+[podiosv:vars]
+ansible_user=vagrant
+ansible_ssh_pass=vagrant
+ansible_password=vagrant
+nc_port=830
+
 #always-on
 [csr_ao]
 ios-xe-mgmt.cisco.com
@@ -29,8 +35,17 @@ ansible_user=admin
 ansible_password=ciscopsdt
 
 [nxos]
-198.18.134.140
-198.18.134.141
+192.168.1.3
+#198.18.134.140
+#198.18.134.141
+
+[nxos:vars]
+ansible_user=vagrant
+ansible_ssh_pass=vagrant
+nc_port=830
+
+[nxos_vagrant]
+nxosprep
 
 #always on
 [nxos_ao]
@@ -42,4 +57,7 @@ ansible_password = Admin_1234!
 ansible_port=8181
 nc_port=10000
 
-
+[DCA:children]
+podiosv
+aci
+nxos

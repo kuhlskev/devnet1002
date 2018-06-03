@@ -13,13 +13,13 @@
     #  VLAN CONFIGURATION
     ############################################################
     - name: ensure VLANs exist on switches
-      nxos_vlan: vlan_range="2-19,99" state=present host={{ inventory_hostname }} username={{ username }} password={{ password }}
+      nxos_vlan: vlan_range="2-19,99" state=present host={{ inventory_hostname }} 
 
     #############################################################
     # Layer 2 switchport configs
     #############################################################
     - name: L2 config for uplinks
-      nxos_switchport: interface={{ item }} mode=trunk native_vlan=99 trunk_vlans=2-19 host={{ inventory_hostname }} username={{ username }} password={{ password }}
+      nxos_switchport: interface={{ item }} mode=trunk native_vlan=99 trunk_vlans=2-19 host={{ inventory_hostname }}
       with_items:
         - Ethernet1/49
         - Ethernet1/50

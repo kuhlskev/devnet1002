@@ -1,7 +1,7 @@
 #simple IOS config in ansible
 ---
 - name: Sample IOS config for Ansible 2.5
-  hosts: csr_ao
+  hosts: podiosv
   vars_files:
     - var_files/vars.yml
     #- var_files/podiosv.yml
@@ -11,6 +11,7 @@
   - debug: msg="{{ansible_ssh_pass}}"
   - name: set ACL via CLI
     ios_config:
+      host: "{{inventory_hostname}}"
       lines:
         - 10 permit ip host 1.1.1.1 any log
         - 20 permit ip host 2.2.2.2 any log

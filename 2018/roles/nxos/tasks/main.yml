@@ -1,5 +1,11 @@
 ---
 
+  - name: ensure Features enabled on switches
+    nxos_feature: 
+      feature: "{{ item }}"
+      state: enabled 
+    with_items: "{{feature_list}}"
+
 ############################################################
 #  VLAN CONFIGURATION
 ############################################################
