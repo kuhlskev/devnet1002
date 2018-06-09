@@ -1,7 +1,7 @@
 #simple IOS config in ansible
 ---
 - name: Sample IOS config
-  hosts: csr_ao
+  hosts: podiosv
   connection: local
   gather_facts: True
   vars_files:
@@ -11,8 +11,8 @@
   - name: set ACL via CLI
     ios_config:
       host: "{{inventory_hostname}}"
-      username: "{{csr_username}}"
-      password: "{{csr_password}}"
+      #username: "{{ansible_user}}"
+      #password: "{{ansible_ssh_pass}}"
       lines:
         - 10 permit ip host 1.1.1.1 any log
         - 20 permit ip host 2.2.2.2 any log
@@ -25,9 +25,5 @@
   - name: set ntp server via CLI
     ios_config:
       host: "{{inventory_hostname}}"
-      username: "{{csr_username}}"
-      password: "{{csr_password}}"
       lines: 
         - ntp server 1.1.1.{{pod}}
-
-

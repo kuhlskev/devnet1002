@@ -11,9 +11,9 @@
     - name: set ntp server via NETCONF
       netconf_config:
         host: "{{inventory_hostname}}"
-        username: "{{csr_username}}"
+        username: "{{ansible_user}}"
         hostkey_verify: False
-        password: "{{csr_password}}"
+        password: "{{ansible_ssh_pass}}"
         port: 830
         xml: |
             <config xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0">

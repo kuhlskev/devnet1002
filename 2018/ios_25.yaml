@@ -7,8 +7,6 @@
     #- var_files/podiosv.yml
 
   tasks:
-  - debug: msg="{{ansible_user}}"
-  - debug: msg="{{ansible_ssh_pass}}"
   - name: set ACL via CLI
     ios_config:
       host: "{{inventory_hostname}}"

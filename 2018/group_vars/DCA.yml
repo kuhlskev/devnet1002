@@ -1,11 +1,5 @@
 ---
 
-csr_username: 'root'
-csr_password: 'D_Vay!_10&'
-
-username: admin
-password: C1sco12345
-
 ntp3: 3.3.3.3
 ntp4: 4.4.4.4
 
