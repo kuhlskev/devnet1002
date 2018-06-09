@@ -17,3 +17,5 @@
       password: "{{ansible_ssh_pass}}"
       xml: "{{int_template}}"
     with_items: "{{fabric}}"
+    loop_control:
+      pause: 5
