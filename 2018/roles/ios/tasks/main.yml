@@ -1,6 +1,4 @@
 ---
-  - debug: msg="{{ansible_user}}"
-  - debug: msg="{{ansible_ssh_pass}}"
   - name: configure vrf
     netconf_config:
       host: "{{inventory_hostname}}"
