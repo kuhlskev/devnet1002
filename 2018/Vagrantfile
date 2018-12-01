@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
 
       node.vm.network "private_network",
         ip: "172.20.20.10",
-        name: "vboxnet2",
+        name: "vboxnet5",
         auto_config: false,
         nic_type: "virtio"
       node.vm.network "private_network", 
@@ -78,7 +78,7 @@ Vagrant.configure("2") do |config|
       n9kv1.vm.network :forwarded_port, guest: 443, host: 3143, id: 'https', auto_correct: true
       n9kv1.vm.network :forwarded_port, guest: 830, host: 3130, id: 'netconf', auto_correct: true      
 
-      n9kv1.vm.network "private_network", ip: "172.20.20.50", name: "vboxnet0", auto_config: false
+      n9kv1.vm.network "private_network", ip: "172.20.20.50", name: "vboxnet5", auto_config: false
       n9kv1.vm.network "private_network", auto_config: false, virtualbox__intnet: "nxosv_network2"
       n9kv1.vm.network "private_network", auto_config: false, virtualbox__intnet: "nxosv_network3"
 
