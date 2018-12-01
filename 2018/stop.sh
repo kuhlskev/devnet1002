@@ -1,5 +1,5 @@
 #!/bin/bash
-# Prepare environment for DEVNET2449 Lab
+# Remove environment for DEVNET1002 Lab
 
-vagrant suspend
+vagrant destroy
 docker rm -f `docker ps -a -q`
