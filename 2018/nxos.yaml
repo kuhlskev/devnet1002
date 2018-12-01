@@ -13,7 +13,11 @@
     #  VLAN CONFIGURATION
     ############################################################
     - name: ensure VLANs exist on switches
-      nxos_vlan: vlan_range="2-19,99" state=present host={{ inventory_hostname }} 
+      nxos_vlan: 
+        vlan_range: "2-19,99" 
+        state: present 
+        validate_certs: no
+        #host: {{ inventory_hostname }} 
 
     #############################################################
     # Layer 2 switchport configs

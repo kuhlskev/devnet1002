@@ -6,7 +6,7 @@
 
 Vagrant.configure("2") do |config|
     config.vm.define "rtr1" do |node|
-      node.vm.box = "iosxe16.5.0"
+      node.vm.box = "xe16.9.1"
       node.vm.network "private_network", 
         ip: "172.20.20.10",
         auto_config: false
@@ -23,15 +23,15 @@ Vagrant.configure("2") do |config|
           "--type", "dvddrive", 
           "--medium", "rtr1.iso"
         ]
-        #v.customize ["modifyvm", :id, 
-        #  "--uart1", "0x3F8", 4, 
-        #  "--uartmode1", 'tcpserver', 65000
-        #]
+        v.customize ["modifyvm", :id, 
+          "--uart1", "0x3F8", 4, 
+          "--uartmode1", 'tcpserver', 65000
+        ]
       end
     end
 
     config.vm.define "rtr2" do |node|
-      node.vm.box = "iosxe16.5.0"
+      node.vm.box = "xe16.9.1"
       node.vm.network "private_network", 
         ip: "172.20.20.20",
         auto_config: false

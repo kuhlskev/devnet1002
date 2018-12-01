@@ -4,4 +4,4 @@ ansible_become_method: enable
 ansible_network_os: ios
 ansible_user: "{{csr_username}}"
 ansible_ssh_pass: "{{csr_password}}"
-ansible_port: 8181
+#ansible_port: 8181

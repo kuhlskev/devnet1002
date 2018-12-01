@@ -14,7 +14,9 @@ RUN apk add openconnect --update-cache --repository http://nl.alpinelinux.org/al
     && printf "StrictHostKeyChecking no\nHostKeyAlgorithms +ssh-dss\n" \\
         >> ~/.ssh/config \
     && chmod -R 600 ~/.ssh \
-    && touch ~/.ssh/known_hosts
+    && touch ~/.ssh/known_hosts 
+
+ENV ANSIBLE_CONFIG=/home/docker/ansible.cfg 
 
 WORKDIR /home/docker
 CMD ["/bin/sh"]

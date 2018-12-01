@@ -1,9 +1,12 @@
-csr_username: 'root'
-csr_password: 'D_Vay!_10&'
+#csr_username: 'root'
+#csr_password: 'D_Vay!_10&'
+
+csr_username: 'vagrant'
+csr_password: 'vagrant'
 
 username: admin
 password: C1sco12345
 
-pod: 0 
+pod: 2 
 ntp3: 3.3.3.3
 ntp4: 4.4.4.4
