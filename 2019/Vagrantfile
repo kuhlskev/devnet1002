@@ -6,7 +6,7 @@
 
 Vagrant.configure("2") do |config|
     config.vm.define "rtr1" do |node|
-      node.vm.box = "xe16.8.1a"
+      node.vm.box = "iosxe/16.08.01"
       # Explicity set SSH Port to avoid conflict and for provisioning
       node.vm.network :forwarded_port, guest: 22, host: 2222, id: 'ssh', auto_correct: true
       # Forward API Ports
