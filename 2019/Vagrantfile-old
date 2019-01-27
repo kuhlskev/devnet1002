@@ -1,0 +1,118 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile for 2 CSR Routers and a JumpHost Ubuntu box
+# For the session we will use kuhlskev/ansible_host container at dockerhub
+
+Vagrant.configure("2") do |config|
+    config.vm.define "rtr1" do |node|
+      node.vm.box = "xe16.8.1a"
+      # Explicity set SSH Port to avoid conflict and for provisioning
+      node.vm.network :forwarded_port, guest: 22, host: 2222, id: 'ssh', auto_correct: true
+      # Forward API Ports
+      node.vm.network :forwarded_port, guest: 80, host: 2280, id: 'http', auto_correct: true
+      node.vm.network :forwarded_port, guest: 443, host: 2443, id: 'https', auto_correct: true
+      node.vm.network :forwarded_port, guest: 830, host: 2830, id: 'netconf', auto_correct: true      
+
+      node.vm.network "private_network",
+        ip: "172.20.20.10",
+        name: "vboxnet0",
+        auto_config: false,
+        nic_type: "virtio"
+      node.vm.network "private_network", 
+        virtualbox__intnet: "link1", 
+        auto_config: false,
+        nic_type: "virtio" 
+      
+      # attach a configuration disk
+      node.vm.provider "virtualbox" do |v|
+        v.customize ["storageattach", :id, 
+          "--storagectl", "IDE_Controller", 
+          "--port", 1, 
+          "--device", 0, 
+          "--type", "dvddrive", 
+          "--medium", "rtr1.iso"
+        ]
+        v.customize ["modifyvm", :id, "--memory", 3072]
+        #v.customize ["modifyvm", :id, 
+        #  "--uart1", "0x3F8", 4, 
+        #  "--uartmode1", 'tcpserver', 65000
+        #]
+      end
+    end
+
+#    config.vm.define "rtr2" do |node|
+#      node.vm.box = "xe16.8.1a"
+#      node.vm.network "private_network", 
+#        ip: "172.20.20.20",
+#        auto_config: false
+#      node.vm.network "private_network", 
+#        virtualbox__intnet: "link1", 
+#        auto_config: false,
+#        nic_type: "virtio" 
+#
+#      # attach a configuration disk
+#      node.vm.provider "virtualbox" do |v|
+#        v.customize ["storageattach", :id, 
+#          "--storagectl", "IDE_Controller", 
+#          "--port", 1, 
+#          "--device", 0, 
+#          "--type", "dvddrive", 
+#          "--medium", "rtr2.iso"
+#        ]
+#        #v.customize ["modifyvm", :id, 
+#        #  "--uart1", "0x3F8", 4, 
+#        #  "--uartmode1", 'tcpserver', 65001
+#        #]
+#      end
+#    end
+    config.vm.define "n9kv1" do |n9kv1|
+      n9kv1.vm.box = "N9k-NCRC"
+      n9kv1.ssh.insert_key = false
+      n9kv1.vm.boot_timeout = 420
+      n9kv1.vm.synced_folder '.', '/vagrant', disabled: true
+      # Explicity set SSH Port to avoid conflict and for provisioning
+      n9kv1.vm.network :forwarded_port, guest: 22, host: 3122, id: 'ssh', auto_correct: true
+      # Forward API Ports
+      n9kv1.vm.network :forwarded_port, guest: 80, host: 3180, id: 'http', auto_correct: true
+      n9kv1.vm.network :forwarded_port, guest: 443, host: 3143, id: 'https', auto_correct: true
+      n9kv1.vm.network :forwarded_port, guest: 830, host: 3130, id: 'netconf', auto_correct: true      
+
+      n9kv1.vm.network "private_network", ip: "192.168.1.3", name: "vboxnet1", auto_config: false
+      n9kv1.vm.network "private_network", auto_config: false, virtualbox__intnet: "nxosv_network2"
+      n9kv1.vm.network "private_network", auto_config: false, virtualbox__intnet: "nxosv_network3"
+
+      n9kv1.vm.provider :virtualbox do |vb|
+        vb.customize ["modifyvm", :id, "--memory", 4096]
+        vb.customize ['modifyvm',:id,'--nicpromisc2','allow-all']
+        vb.customize ['modifyvm',:id,'--nicpromisc3','allow-all']
+        vb.customize ['modifyvm',:id,'--nicpromisc4','allow-all']
+
+        vb.customize ["modifyvm", :id, 
+            "--uart1", "0x3F8", 4, 
+            "--uartmode1", 'tcpserver', 59999
+          ]
+        end
+#        n9kv1.vm.provision "shell", privileged: true, inline: <<-SHELL
+#          sleep 30 #otherwise the interfaces might not be ready for configuration
+#
+#          # Configure Eth1/1 with unique MAC and IP
+#
+#          echo -e 'hostname n9kv1\nfeature nxapi\nvrf context management\n ip route 0.0.0.0/0 10.0.2.3\ndefault interface Ethernet1/1\ninterface Ethernet1/1\n no shutdown\n no switchport\n\n mac-address 1.1.1\n'> /tmp/mac-cfg
+#          sudo vsh -r /tmp/mac-cfg
+#          sudo ip add add 172.20.20.30/24 dev Eth1-1
+#
+#          echo "192.168.1.254    master">>/etc/hosts
+#          sudo bash -c  'echo "nameserver 10.0.2.3" > /etc/resolv.conf'
+#          sudo vsh -c 'copy running-config startup-config'
+#
+#          echo -e '\n\n----------------\n\nProvisioning complete\n'
+#
+#        SHELL
+    end
+    #config.vm.provision "ansible" do |ansible|
+    #  ansible.playbook = "ansible_provision.yaml"
+    #  ansible.inventory_path = "./hosts"
+    #  ansible.raw_arguments = ["--connection=paramiko"]
+    #end    
+end

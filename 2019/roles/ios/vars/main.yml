@@ -1,0 +1,46 @@
+---
+vrf_template: |
+  <config xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0">
+    <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+      <ip>
+        <vrf>
+          <name>{{ item['tenant_name'] }}</name>
+          <rd>{{item['tenant_id']}}:{{item['tenant_id']}}</rd>
+        </vrf>
+      </ip>
+    </native>
+  </config>
+
+int_template: |
+  <config xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0">
+    <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+      <interface>
+       {% for interface in item['ints'] %}
+        <GigabitEthernet>
+          <name>3.{{interface['vlan_id']}}</name>
+          <description>{{interface['name']}}</description>
+          <encapsulation>
+            <dot1Q>
+              <vlan-id>{{interface['vlan_id']}}</vlan-id>
+            </dot1Q>
+          </encapsulation>
+          <ip-vrf>
+            <ip>
+              <vrf>
+                <forwarding>{{item['tenant_name']}}</forwarding>
+              </vrf>
+            </ip>
+          </ip-vrf>
+          <ip>
+            <address>
+              <primary>
+                <address>{{interface['subnet'] | ipaddr('1') | ipaddr('address')}}</address>
+                <mask>{{interface['subnet'] | ipaddr('netmask')}}</mask>
+              </primary>
+            </address>
+          </ip>
+        </GigabitEthernet>
+      {% endfor %}
+      </interface>
+    </native>
+  </config>

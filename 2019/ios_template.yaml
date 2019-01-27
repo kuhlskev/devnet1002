@@ -1,0 +1,13 @@
+---
+- name: Sample IOS config generator
+  hosts: podiosv
+  connection: local
+  gather_facts: True
+  vars_files:
+    #- var_files/passwords.yml
+
+  tasks:
+    - debug: var=inventory_hostname
+
+  roles:
+    - iosv_config

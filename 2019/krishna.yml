@@ -1,0 +1,21 @@
+---
+
+- name: interface config
+  hosts: ios-xe
+  gather_facts: no
+
+  tasks:
+
+    - name: interface configuration
+      netconf_config:
+      xml: |
+<config>
+<native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+<interface>
+<GigabitEthernet>
+<name>1/0/5</name>
+<description>testgin123</description>
+</GigabitEthernet>
+</interface>
+</native>
+</config>
