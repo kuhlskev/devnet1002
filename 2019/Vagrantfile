@@ -67,7 +67,7 @@ Vagrant.configure("2") do |config|
 #      end
 #    end
     config.vm.define "n9kv1" do |n9kv1|
-      n9kv1.vm.box = "N9k-NCRC"
+      n9kv1.vm.box = "nxos/9.2.1"
       n9kv1.ssh.insert_key = false
       n9kv1.vm.boot_timeout = 420
       n9kv1.vm.synced_folder '.', '/vagrant', disabled: true
@@ -83,7 +83,7 @@ Vagrant.configure("2") do |config|
       n9kv1.vm.network "private_network", auto_config: false, virtualbox__intnet: "nxosv_network3"
 
       n9kv1.vm.provider :virtualbox do |vb|
-        vb.customize ["modifyvm", :id, "--memory", 4096]
+        vb.customize ["modifyvm", :id, "--memory", 8192]
         vb.customize ['modifyvm',:id,'--nicpromisc2','allow-all']
         vb.customize ['modifyvm',:id,'--nicpromisc3','allow-all']
         vb.customize ['modifyvm',:id,'--nicpromisc4','allow-all']
