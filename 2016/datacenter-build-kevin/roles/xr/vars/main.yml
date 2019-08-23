@@ -1,8 +1,0 @@
----
-
-# Interface variables
-hostname: "{{site_name}}-gw"
-ext_gw_ip: "{{ v300_cidr | ipaddr('1') | ipaddr('address') }}"
-ext_netmask: "{{ v300_cidr | ipaddr('netmask') }}"
-ext_asa_ip: "{{ v300_cidr | ipaddr('4') | ipaddr('address') }}"
-
