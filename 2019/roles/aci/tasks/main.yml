@@ -10,6 +10,7 @@
       description: Production tenant
       state: present
       validate_certs: false
+      port: "{{https_port}}"
     with_items: "{{fabric}}"
   
   - name: Add a new VRF to a tenant
@@ -21,6 +22,7 @@
       tenant: "{{item['tenant_name']}}"
       state: present  
       validate_certs: false
+      port: "{{https_port}}"
     with_items: "{{fabric}}"
 
   - name: Add Bridge Domains
@@ -33,6 +35,7 @@
       tenant: "{{item[0]['tenant_name']}}"
       bd: "{{item[1]['name']}}-bd"
       vrf: "{{item[0]['tenant_name']}}-vrf"
+      port: "{{https_port}}"
     with_subelements: 
       - "{{fabric}}"
       - ints 
@@ -47,6 +50,7 @@
       bd: "{{item[1]['name']}}-bd"
       gateway: "{{ item[1]['subnet'] | ipaddr('1') | ipaddr('address') }}"
       mask: "{{ item[1]['subnet'] | ipaddr('prefix') }}"
+      port: "{{https_port}}"
     with_subelements: 
       - "{{fabric}}"
       - ints 

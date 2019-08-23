@@ -6,7 +6,8 @@
 
 Vagrant.configure("2") do |config|
     config.vm.define "rtr1" do |node|
-      node.vm.box = "iosxe/16.08.01"
+      #node.vm.box = "iosxe/16.08.01"
+      node.vm.box = "xe16.8.1a"
       # Explicity set SSH Port to avoid conflict and for provisioning
       node.vm.network :forwarded_port, guest: 22, host: 2222, id: 'ssh', auto_correct: true
       # Forward API Ports
@@ -83,7 +84,7 @@ Vagrant.configure("2") do |config|
       n9kv1.vm.network "private_network", auto_config: false, virtualbox__intnet: "nxosv_network3"
 
       n9kv1.vm.provider :virtualbox do |vb|
-        vb.customize ["modifyvm", :id, "--memory", 4096]
+        vb.customize ["modifyvm", :id, "--memory", 8192]
         vb.customize ['modifyvm',:id,'--nicpromisc2','allow-all']
         vb.customize ['modifyvm',:id,'--nicpromisc3','allow-all']
         vb.customize ['modifyvm',:id,'--nicpromisc4','allow-all']

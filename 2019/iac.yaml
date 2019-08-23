@@ -1,12 +1,14 @@
 ---
 
-#- name: ACI
-#  hosts: aci
-#  connection: local
-#  tasks:
-#    - debug: var=inventory_hostname
-#  roles:
-#    - aci
+- name: ACI
+  hosts: aci_cpoc
+  connection: local
+  tasks:
+    - debug: var=inventory_hostname
+  vars_files:
+    - var_files/iac_vars.yml
+  roles:
+    - aci
 #
 #- name: UCS
 #  hosts: ucsm
@@ -16,18 +18,20 @@
 #  roles:
 #    - ucs
 
-- name: IOS
-  hosts: podiosv
-  connection: local
-  tasks:
-    - debug: var=inventory_hostname
-  roles:
-    - ios
+#- name: IOS
+#  hosts: podiosv
+#  connection: local
+#  tasks:
+#    - debug: var=inventory_hostname
+#  roles:
+#    - ios
 
 - name: NXOS
   hosts: nxos
   connection: local
   tasks:
     - debug: var=inventory_hostname
+  vars_files:
+    - var_files/iac_vars.yml
   roles:
     - nxos

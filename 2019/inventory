@@ -12,6 +12,8 @@ ansible_password = C1sco12345
 ansible_user=vagrant
 ansible_ssh_pass=vagrant
 ansible_password=vagrant
+ANSIBLE_NET_USERNAME=vagrant
+ANSIBLE_NET_PASSWORD=vagrant
 nc_port=830
 
 #always-on
@@ -25,6 +27,17 @@ ansible_port=8181
 
 [aci]
 198.18.133.200
+
+[aci_cpoc]
+172.26.17.138
+
+[aci_cpoc:vars]
+https_port=4443
+ansible_port=4443
+ansible_user=admin
+ansible_password=cisco123
+username=admin
+password=cisco123
 
 #always-on
 [aci_ao]
@@ -56,6 +69,13 @@ ansible_username = admin
 ansible_password = Admin_1234!
 ansible_port=8181
 nc_port=10000
+
+[ucsm]
+172.26.17.134
+
+[ucsm:vars]
+ansible_user=uscpe
+ansible_password=ucspe
 
 [DCA:children]
 podiosv

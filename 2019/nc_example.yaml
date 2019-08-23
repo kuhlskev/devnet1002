@@ -10,11 +10,11 @@
 
     - name: set ntp server via NETCONF
       netconf_config:
-        host: "{{inventory_hostname}}"
-        username: "{{ansible_user}}"
+        #host: "{{inventory_hostname}}"
+        #username: "{{ansible_user}}"
         hostkey_verify: False
-        password: "{{ansible_ssh_pass}}"
-        port: 830
+        #password: "{{ansible_ssh_pass}}"
+        #port: 830
         xml: |
             <config xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0">
               <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">

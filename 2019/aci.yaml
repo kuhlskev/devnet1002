@@ -1,6 +1,6 @@
 ---
 - name: Sample ACI config
-  hosts: aci_ao
+  hosts: aci_cpoc
   connection: local
   gather_facts: True
   vars_files:
@@ -12,7 +12,8 @@
       host: "{{inventory_hostname}}"
       username: "{{ansible_user}}"
       password: "{{ansible_password}}"
-      tenant: "DevNetCLUS_{{pod}}"
+      tenant: "TKL_{{pod}}"
       description: Awesome tenant
       state: present
       validate_certs: false
+      port: "{{https_port}}"
