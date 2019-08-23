@@ -1,5 +1,0 @@
-ansible
-requests
-xlrd
-lxml
-ncclient
