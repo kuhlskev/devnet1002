@@ -5,7 +5,7 @@
     state: directory
 
 # You can iterate through via Variable
-- name: Generate ASR Configuration Files
+- name: Generate Configuration Files
   template:
     src: router_full.j2
     dest: "{{ config_output_directory }}/{{item.device_name}}.txt"
