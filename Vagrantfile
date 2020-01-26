@@ -38,7 +38,7 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.define "n9kv1" do |n9kv1|
-      n9kv1.vm.box = "N9k-NCRC"
+      n9kv1.vm.box = "nxos/9.3.3"
       n9kv1.ssh.insert_key = false
       n9kv1.vm.boot_timeout = 420
       n9kv1.vm.synced_folder '.', '/vagrant', disabled: true
