@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# Vagrantfile for 2 CSR Routers and a JumpHost Ubuntu box
+# Vagrantfile for a CSR 1000V router and a Nexus 9000v switch
 # For the session we will use kuhlskev/ansible_host container at dockerhub
 
 Vagrant.configure("2") do |config|
@@ -34,40 +34,11 @@ Vagrant.configure("2") do |config|
           "--medium", "rtr1.iso"
         ]
         v.customize ["modifyvm", :id, "--memory", 3072]
-        #v.customize ["modifyvm", :id, 
-        #  "--uart1", "0x3F8", 4, 
-        #  "--uartmode1", 'tcpserver', 65000
-        #]
       end
     end
 
-#    config.vm.define "rtr2" do |node|
-#      node.vm.box = "xe16.8.1a"
-#      node.vm.network "private_network", 
-#        ip: "172.20.20.20",
-#        auto_config: false
-#      node.vm.network "private_network", 
-#        virtualbox__intnet: "link1", 
-#        auto_config: false,
-#        nic_type: "virtio" 
-#
-#      # attach a configuration disk
-#      node.vm.provider "virtualbox" do |v|
-#        v.customize ["storageattach", :id, 
-#          "--storagectl", "IDE_Controller", 
-#          "--port", 1, 
-#          "--device", 0, 
-#          "--type", "dvddrive", 
-#          "--medium", "rtr2.iso"
-#        ]
-#        #v.customize ["modifyvm", :id, 
-#        #  "--uart1", "0x3F8", 4, 
-#        #  "--uartmode1", 'tcpserver', 65001
-#        #]
-#      end
-#    end
     config.vm.define "n9kv1" do |n9kv1|
-      n9kv1.vm.box = "N9k-NCRC"
+      n9kv1.vm.box = "nxos/9.3.3"
       n9kv1.ssh.insert_key = false
       n9kv1.vm.boot_timeout = 420
       n9kv1.vm.synced_folder '.', '/vagrant', disabled: true
@@ -87,10 +58,6 @@ Vagrant.configure("2") do |config|
         vb.customize ['modifyvm',:id,'--nicpromisc2','allow-all']
         vb.customize ['modifyvm',:id,'--nicpromisc3','allow-all']
         vb.customize ['modifyvm',:id,'--nicpromisc4','allow-all']
-        vb.customize ["modifyvm", :id, 
-            "--uart1", "0x3F8", 4, 
-            "--uartmode1", 'tcpserver', 59999
-        ]
         vb.customize "pre-boot", [
                 "storageattach", :id,
                 "--storagectl", "SATA",

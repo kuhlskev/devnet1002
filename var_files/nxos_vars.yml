@@ -1,10 +1,11 @@
 # Configure connection details for NX-OS devices
-#ansible_connection: network_cli
-#ansible_network_os: nxos
-#ansible_user: "vagrant"
-#ansible_ssh_pass: "vagrant"
-#ansible_become: yes
-#ansible_become_method: enable
+ansible_connection: httpapi
+ansible_network_os: nxos
+ansible_httpapi_port: 443
+ansible_httpapi_use_ssl: yes
+ansible_httpapi_validate_certs: no
+ansible_user: vagrant
+ansible_password: vagrant
 
 #List all global VLANs
 vlan_list:
