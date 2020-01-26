@@ -34,10 +34,6 @@ Vagrant.configure("2") do |config|
           "--medium", "rtr1.iso"
         ]
         v.customize ["modifyvm", :id, "--memory", 3072]
-        #v.customize ["modifyvm", :id, 
-        #  "--uart1", "0x3F8", 4, 
-        #  "--uartmode1", 'tcpserver', 65000
-        #]
       end
     end
 
@@ -62,10 +58,6 @@ Vagrant.configure("2") do |config|
         vb.customize ['modifyvm',:id,'--nicpromisc2','allow-all']
         vb.customize ['modifyvm',:id,'--nicpromisc3','allow-all']
         vb.customize ['modifyvm',:id,'--nicpromisc4','allow-all']
-        vb.customize ["modifyvm", :id, 
-            "--uart1", "0x3F8", 4, 
-            "--uartmode1", 'tcpserver', 59999
-        ]
         vb.customize "pre-boot", [
                 "storageattach", :id,
                 "--storagectl", "SATA",
