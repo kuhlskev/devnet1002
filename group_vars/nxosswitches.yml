@@ -4,8 +4,10 @@ ansible_network_os: nxos
 ansible_httpapi_port: 443
 ansible_httpapi_use_ssl: yes
 ansible_httpapi_validate_certs: no
-ansible_user: vagrant
-ansible_password: vagrant
+ansible_user: cisco
+ansible_password: cisco
+
+nc_port: 830
 
 #List all global VLANs
 vlan_list:

@@ -1,6 +1,6 @@
 ---
 - name: IOS
-  hosts: iospod
+  hosts: iosrouters
   connection: local
   tasks:
     - debug: var=inventory_hostname
@@ -8,7 +8,7 @@
     - ios_iac
 
 - name: NXOS
-  hosts: nxospod
+  hosts: nxosswitches
   connection: local
   tasks:
     - debug: var=inventory_hostname

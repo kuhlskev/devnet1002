@@ -1,6 +1,6 @@
 ---
 - name: Sample NETCONF config
-  hosts: iospod
+  hosts: iosrouters
   connection: local
   gather_facts: True
   vars_files:

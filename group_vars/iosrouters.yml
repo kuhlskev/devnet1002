@@ -1,0 +1,11 @@
+ansible_connection: ansible.netcommon.network_cli
+ansible_user: cisco
+ansible_password: cisco
+ansible_become: yes
+ansible_become_method: enable
+ansible_network_os: cisco.ios.ios
+
+pod: 2 
+
+ntp3: 3.3.3.3
+ntp4: 4.4.4.4

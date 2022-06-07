@@ -1,12 +1,13 @@
 ---
-- name: NX-OS leaf configuration
-  hosts: nxospod
-  vars_files:
-    - var_files/nxos_vars.yml
+- name: Sample NX-OS NX-API
+  hosts: nxosswitches
+  gather_facts: no
+  collections:
+    - cisco.nxos
 
   tasks:
 
-  - name: configure VLANs as defined in vars and host_vars
+  - name: configure VLANs
     nxos_vlan:
       aggregate: "{{ vlan_list }}"
       state: present
