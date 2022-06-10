@@ -1,3 +1,4 @@
+---
 - name: Sample IOS automated CLI
   hosts: iosrouters
   gather_facts: no
@@ -17,7 +18,7 @@
       parents: ['ip access-list extended pod_{{pod}}_acl']
 
   - name: set ntp server 10.1.{{pod}}.{{item}} via CLI loop
-    cisco.ios.ios_config:
+    ios_config:
       lines:
         - ntp server 10.1.{{pod}}.{{item}}
     loop:

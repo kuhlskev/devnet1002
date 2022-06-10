@@ -1,5 +1,5 @@
 ---
-- name: Sample NX-OS NX-API
+- name: Sample NX-OS NX-API playbook
   hosts: nxosswitches
   gather_facts: no
   collections:
@@ -7,18 +7,45 @@
 
   tasks:
 
-  - name: configure VLANs
-    nxos_vlan:
-      aggregate: "{{ vlan_list }}"
+  - name: Enable NXAPI access
+    vars:
+      ansible_connection: ansible.netcommon.network_cli
+    cisco.nxos.nxos_nxapi:
       state: present
-      purge: yes
+      enable_http: false
+      https: yes
+      ssl_strong_ciphers: yes
+      tlsv1_2: yes
 
-  - name: L2 config for uplinks
-    nxos_interface:
-      aggregate: "{{l2_ports}}"
-      mode: layer2
-      admin_state: up
+  - name: configure VLANs
+    nxos_vlans:
+      state: merged
+      config:
+        - vlan_id: 20
+          name: clus-guests
+        - vlan_id: 30
+          name: clus-servers
+
+  - name: Enable L2 interfaces
+    nxos_interfaces:
+      state: merged    
+      config:
+      - name: Ethernet1/{{item}}
+        description: Configured by Ansible
+        enabled: true
+        mode: layer2
+    loop:
+          - 49
+          - 50
 
   - name: trunk config for uplinks
-    nxos_l2_interface:
-      aggregate: "{{trunk_ports}}"
+    nxos_l2_interfaces:
+      state: merged
+      config:
+      - name: Ethernet1/49
+        trunk:
+          native_vlan: 20
+          allowed_vlans: 1,20,30
+      - name: Ethernet1/50
+        access:
+          vlan: 30
