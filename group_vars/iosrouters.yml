@@ -1,9 +1,6 @@
 ---
 pod: 2 
 
-ntp3: 3.3.3.3
-ntp4: 4.4.4.4
-
 iosrouters:
   10.10.20.175:
     hostname: "clus-rtr1"

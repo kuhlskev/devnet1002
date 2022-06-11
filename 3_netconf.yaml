@@ -1,27 +1,26 @@
 ---
-- name: Sample NETCONF config
+- name: set NTP server over NETCONF
   hosts: iosrouters
-  connection: local
-  gather_facts: True
-  vars_files:
-    - var_files/ios_vars.yml
+  gather_facts: no
 
   tasks:
 
-    - name: set ntp server via NETCONF
-      netconf_config:
-        host: "{{inventory_hostname}}"
-        username: "{{ansible_user}}"
-        hostkey_verify: False
-        password: "{{ansible_ssh_pass}}"
-        port: 830
-        xml: |
-            <config xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0">
+  - name: enable NETCONF
+    cisco.ios.ios_config:
+      lines:
+        - netconf-yang
+
+  - name: set ntp server using netconf
+    vars:
+      ansible_connection: ansible.netcommon.netconf
+    ansible.netcommon.netconf_config:
+      content: |
+            <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
               <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
                 <ntp>
                   <server xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-ntp">
                     <server-list>
-                      <ip-address>5.5.5.{{pod}}</ip-address>
+                      <ip-address>10.1.{{pod}}.1</ip-address>
                     </server-list>
                   </server>
                 </ntp>

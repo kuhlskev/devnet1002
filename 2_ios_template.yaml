@@ -2,7 +2,9 @@
 - name: Jinja2 template example
   hosts: iosrouters
   gather_facts: false
+
   tasks:
-    - name: configure hostname with Jinja2 template
-      cli_config:
-        config: "{{ lookup('template', 'template.j2') }}"
+  
+  - name: configure hostname with Jinja2 template
+    cli_config:
+      config: "{{ lookup('template', 'template.j2') }}"
