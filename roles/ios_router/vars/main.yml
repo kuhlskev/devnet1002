@@ -1,5 +1,5 @@
 ---
-site_name: devnet1002
+site_name: devwks-1759
 external_net_cidr: 192.168.250.0/24
 external_net_vlan: 10
 internal_net_vlan: 20
@@ -33,7 +33,7 @@ snmp_server: 4.4.4.4
 # Device Variables
 podcsr:
   - device_type: "iosv"
-    device_name: "{{ site_name }}-csr1"
+    device_name: "{{ site_name }}-rtr01"
     po1_description: "csr1-N9K1"
     tor_A_description: "tor1 e1/47"
     tor_B_description: "tor1 e1/48"
@@ -41,7 +41,7 @@ podcsr:
     int_ip: "{{ int_csr1_ip }}"
     hsrp_priority: 150
   - device_type: "iosv"
-    device_name: "{{ site_name }}-csr2"
+    device_name: "{{ site_name }}-rtr02"
     po1_description: "csr2-N9K2"
     tor_A_description: "tor2 e1/47"
     tor_B_description: "tor2 e1/48"

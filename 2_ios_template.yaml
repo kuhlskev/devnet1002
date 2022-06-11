@@ -1,11 +1,8 @@
 ---
-- name: Sample IOS template-generated config
+- name: Jinja2 template example
   hosts: iosrouters
-  connection: local
-  gather_facts: True
-
+  gather_facts: false
   tasks:
-    - debug: var=inventory_hostname
-
-  roles:
-    - ios_router
+    - name: configure hostname with Jinja2 template
+      cli_config:
+        config: "{{ lookup('template', 'template.j2') }}"
