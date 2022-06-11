@@ -1,0 +1,9 @@
+---
+- name: Sample IOS template-generated config
+  hosts: iosrouters
+  gather_facts: no
+  collections:
+    - cisco.ios  
+
+  roles:
+    - ios_router

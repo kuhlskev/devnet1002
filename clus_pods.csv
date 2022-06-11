@@ -1,0 +1,16 @@
+Lab,VPN Network Address,Endpoint Port,vpn login,vpn password
+CLUS - Cisco Modeling Labs Enterprise 1,devnetsandbox-usw1-reservation.cisco.com:20156,20156,DEVWKS-Ansible-0,GMPYGSYS
+CLUS - Cisco Modeling Labs Enterprise 2,devnetsandbox-usw1-reservation.cisco.com:20250,20250,DEVWKS-Ansible-1,BJNJDUSC
+CLUS - Cisco Modeling Labs Enterprise 3,devnetsandbox-usw1-reservation.cisco.com:20124,20124,DEVWKS-Ansible-2,ANUMLGFY
+CLUS - Cisco Modeling Labs Enterprise 4,devnetsandbox-usw1-reservation.cisco.com:20266,20266,DEVWKS-Ansible-3,IEJMMXLH
+CLUS - Cisco Modeling Labs Enterprise 5,devnetsandbox-usw1-reservation.cisco.com:20289,20289,DEVWKS-Ansible-4,ZYUTXYNH
+CLUS - Cisco Modeling Labs Enterprise 6,devnetsandbox-usw1-reservation.cisco.com:20296,20296,DEVWKS-Ansible-5,QFTZLHWT
+CLUS - Cisco Modeling Labs Enterprise 7,devnetsandbox-usw1-reservation.cisco.com:20306,20306,DEVWKS-Ansible-6,FUNFMDQU
+CLUS - Cisco Modeling Labs Enterprise 8,devnetsandbox-usw1-reservation.cisco.com:20314,20314,DEVWKS-Ansible-7,BXEVDPLY
+CLUS - Cisco Modeling Labs Enterprise 9,devnetsandbox-usw1-reservation.cisco.com:20183,20183,DEVWKS-Ansible-8,FYOREXRM
+CLUS - Cisco Modeling Labs Enterprise 10,devnetsandbox-usw1-reservation.cisco.com:20317,20317,DEVWKS-Ansible-9,HKYFTIDC
+CLUS - Cisco Modeling Labs Enterprise 11,devnetsandbox-usw1-reservation.cisco.com:20264,20264,DEVWKS-Ansible-10,IADNNTKN
+CLUS - Cisco Modeling Labs Enterprise 12,devnetsandbox-usw1-reservation.cisco.com:20265,20265,DEVWKS-Ansible-11,XRAYYEPT
+CLUS - Cisco Modeling Labs Enterprise 13,devnetsandbox-usw1-reservation.cisco.com:20276,20276,DEVWKS-Ansible-12,EYWEFTRF
+CLUS - Cisco Modeling Labs Enterprise 14,devnetsandbox-usw1-reservation.cisco.com:20322,20322,DEVWKS-Ansible-13,YYTJNSAQ
+CLUS - Cisco Modeling Labs Enterprise 15,devnetsandbox-usw1-reservation.cisco.com:20323,20323,DEVWKS-Ansible-14,TNBLZJOZ
