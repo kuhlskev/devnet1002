@@ -5,11 +5,6 @@
 
   tasks:
 
-  - name: enable NETCONF
-    cisco.ios.ios_config:
-      lines:
-        - netconf-yang
-
   - name: set ntp server using netconf
     vars:
       ansible_connection: ansible.netcommon.netconf

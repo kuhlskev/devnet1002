@@ -1,9 +1,12 @@
 ---
-- name: Sample IOS template-generated config
+- name: Enable NETCONF on IOS routers
   hosts: iosrouters
   gather_facts: no
-  collections:
-    - cisco.ios  
-
   roles:
-    - ios_router
+    - netconf_router
+
+- name: Enable NX-API on NX-OS switches
+  hosts: nxosswitches
+  gather_facts: no
+  roles:
+    - nxapi_switch

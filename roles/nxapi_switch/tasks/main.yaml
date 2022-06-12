@@ -1,0 +1,10 @@
+---
+- name: Enable NXAPI access
+  vars:
+    ansible_connection: ansible.netcommon.network_cli
+  cisco.nxos.nxos_nxapi:
+    state: present
+    enable_http: false
+    https: yes
+    ssl_strong_ciphers: yes
+    tlsv1_2: yes

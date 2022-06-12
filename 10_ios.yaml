@@ -1,5 +1,5 @@
 ---
-- name: Sample IOS automated CLI
+- name: IOS automated CLI example
   hosts: iosrouters
   gather_facts: no
   collections:

@@ -1,1 +1,1 @@
-The ansible playbooks are numbered 1_ through 5_ and are to be ran with ansible-playbook. 
+The ansible playbooks are numbered 01_ through 50_ and are to be ran with ansible-playbook. 
