@@ -1,0 +1,46 @@
+{
+  "items": [
+    {
+      "title": "Introduction",
+      "content": "01-intro.md"
+    },
+    {
+      "title": "Lab Setup",
+      "content": "02-lab-setup.md"
+    },
+    {
+      "title": "CLI Automation",
+      "content": "03-cli-automation.md"
+    },
+    {
+      "title": "API Automation",
+      "content": "04-api-automation.md"
+    }
+    
+  ],
+  "config": {
+    "devEnv": {
+      "id": "devenv-tf-ansible",
+      "default_content":"src/"
+    },
+    "video": {},
+    "sandbox": {}
+  },
+  "meta":{
+    "slug": "",
+    "time": "90",
+      "tags": [
+        {
+          "title": "Ansible"
+      },
+      {
+        "title": "API"
+      }
+    ],
+      "authors": [{
+          "name": "Francois Caen",
+          "email": "fracaen@cisco.com"
+      }
+    ]
+  }
+}
