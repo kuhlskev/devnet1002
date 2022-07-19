@@ -1,0 +1,12 @@
+all:
+  children:
+    fabricpods:
+      children:
+        iosrouters:
+          hosts:
+            10.10.20.175:
+            10.10.20.176:
+        nxosswitches:
+          hosts:
+            10.10.20.177:
+            10.10.20.178:
