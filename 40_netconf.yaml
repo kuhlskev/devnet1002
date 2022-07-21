@@ -9,6 +9,7 @@
     vars:
       ansible_connection: ansible.netcommon.netconf
     ansible.netcommon.netconf_config:
+      format: json
       content: |
             <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
               <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">

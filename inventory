@@ -1,29 +1,12 @@
-[all:vars]
-ansible_user=cisco
-ansible_password=cisco
-
-[iosrouters]
-10.10.20.175
-10.10.20.176
-
-[iosrouters:vars]
-ansible_connection=ansible.netcommon.network_cli
-ansible_network_os=cisco.ios.ios
-ansible_become=yes
-ansible_become_method=enable
-netconf_port=830
-
-[nxosswitches]
-10.10.20.177
-10.10.20.178
-
-[nxosswitches:vars]
-ansible_connection=ansible.netcommon.httpapi
-ansible_network_os=cisco.nxos.nxos
-ansible_httpapi_port=443
-ansible_httpapi_use_ssl=yes
-ansible_httpapi_validate_certs=no
-
-[fabricpods:children]
-iosrouters
-nxosswitches
+all:
+  children:
+    fabricpods:
+      children:
+        iosrouters:
+          hosts:
+            10.10.20.175:
+            10.10.20.176:
+        nxosswitches:
+          hosts:
+            10.10.20.177:
+            10.10.20.178:
