@@ -1,0 +1,14 @@
+---
+ansible_connection: ansible.netcommon.network_cli
+ansible_network_os: cisco.ios.ios
+ansible_become: yes
+ansible_become_method: enable
+netconf_port: 830
+
+pod: 2
+
+jinja_data:
+  10.10.20.175:
+    hostname: "impact-rtr1"
+  10.10.20.176:
+    hostname: "impact-rtr2"

@@ -1,0 +1,5 @@
+---
+- name: enable NETCONF
+  cisco.ios.ios_config:
+    lines:
+      - netconf-yang

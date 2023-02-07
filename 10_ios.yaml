@@ -1,13 +1,14 @@
-- name: Sample IOS automated CLI
-  hosts: iospod
-  vars_files:
-    - var_files/ios_vars.yml
+---
+- name: IOS automated CLI example
+  hosts: iosrouters
+  gather_facts: no
+  collections:
+    - cisco.ios
 
   tasks:
 
   - name: set ACL via CLI
     ios_config:
-      host: "{{inventory_hostname}}"
       lines:
         - 10 permit ip host 1.1.1.1 any log
         - 20 permit ip host 2.2.2.2 any log
@@ -16,7 +17,12 @@
         - 50 permit ip host 5.5.5.5 any log
       parents: ['ip access-list extended pod_{{pod}}_acl']
 
-  - name: set NTP server via CLI
+  - name: set ntp server 10.1.{{pod}}.{{item}} via CLI loop
     ios_config:
       lines:
-        - ntp server 1.1.1.{{pod}}
+        - ntp server 10.1.{{pod}}.{{item}}
+    loop:
+        - 11
+        - 12
+        - 13
+

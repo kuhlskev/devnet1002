@@ -1,28 +1,12 @@
-[all:vars]
-ansible_connection=local
-ansible_python_interpreter = /usr/bin/python
-ansible_user = admin
-ansible_password = C1sco12345
-
-[iospod]
-172.20.20.10
-#172.20.20.11
-
-[iospod:vars]
-ansible_user=vagrant
-ansible_ssh_pass=vagrant
-ansible_password=vagrant
-nc_port=830
-
-[nxospod]
-172.20.20.50
-#172.20.20.51
-
-[nxospod:vars]
-ansible_user=vagrant
-ansible_ssh_pass=vagrant
-nc_port=830
-
-[fabricpods:children]
-iospod
-nxospod
+all:
+  children:
+    fabricpods:
+      children:
+        iosrouters:
+          hosts:
+            10.10.20.175:
+            10.10.20.176:
+        nxosswitches:
+          hosts:
+            10.10.20.177:
+            10.10.20.178:

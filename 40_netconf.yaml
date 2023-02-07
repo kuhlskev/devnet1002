@@ -1,0 +1,23 @@
+---
+- name: set NTP server over NETCONF
+  hosts: iosrouters
+  gather_facts: no
+
+  tasks:
+
+  - name: set ntp server using netconf
+    vars:
+      ansible_connection: ansible.netcommon.netconf
+    ansible.netcommon.netconf_config:
+      content: |
+            <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+              <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+                <ntp>
+                  <server xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-ntp">
+                    <server-list>
+                      <ip-address>10.1.{{pod}}.1</ip-address>
+                    </server-list>
+                  </server>
+                </ntp>
+              </native>
+            </config>
